@@ -2,20 +2,20 @@
 import java.util.*;
 
 public class test{
-  ArrayList<mycharacter> data = mycharacter.createData();
+
   public static boolean isOperator(char input) {
-  ArrayList<mycharacter> data = mycharacter.createData();
-    for (mycharacter c : data) {
+    ArrayList<FunOper> data = FunOper.createData();
+    for (FunOper c : data) {
       if (c.equals(input)) {
         return true;
       }
     }
     return false;
   }
-  public static mycharacter convert(char input) {
-    ArrayList<mycharacter> data = mycharacter.createData();
-    mycharacter output = null;
-      for (mycharacter c : data) {
+  public static FunOper convert(char input) {
+    ArrayList<FunOper> data = FunOper.createData();
+    FunOper output = null;
+      for (FunOper c : data) {
         if (c.equals(input)) {
           output = c;
             return output;
@@ -26,7 +26,7 @@ public class test{
 
   public static ArrayList<String> Splitter(String input){
       ArrayList<String> output = new ArrayList<String>();
-      ArrayList<mycharacter> stacks = new ArrayList<mycharacter>();
+      ArrayList<FunOper> stacks = new ArrayList<FunOper>();
       int i = 0;
       while (i < input.length()) {
         // case senario for no spaces
@@ -43,7 +43,7 @@ public class test{
         output.add(holder);
       }
       else if (isOperator(input.charAt(i))) {
-        mycharacter temp = convert(input.charAt(i));
+        FunOper temp = convert(input.charAt(i));
         while (stacks.size() > 0 && temp.isSlower(stacks.get(0))) {
           output.add("" + stacks.remove(0));
         }
@@ -64,10 +64,4 @@ public class test{
 }
 
 
-  public static void main(String[] args) {
-    String testing = "1 + 2 / 3 * 4";
-    String testing2 = "1 + 2 / 3 - 6 * 4";
-
-    System.out.println(Splitter(testing2));
-  }
 }

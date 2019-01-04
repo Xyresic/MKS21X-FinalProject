@@ -2,19 +2,31 @@
 import java.util.*;
 
 public class test{
-  char[] operations = {'+','-','*','/'};
-  public boolean isOperator(char input) {
-    for (char c : operations) {
-      if (c == input) {
+  ArrayList<mycharacter> data = mycharacter.createData();
+  public static boolean isOperator(char input) {
+  ArrayList<mycharacter> data = mycharacter.createData();
+    for (mycharacter c : data) {
+      if (c.equals(input)) {
         return true;
       }
     }
     return false;
   }
-  double result = 9.12;
-  public void Splitter(String input){
-      ArrayList<String> output;
-      ArrayList<String> stacks;
+  public static mycharacter convert(char input) {
+    ArrayList<mycharacter> data = mycharacter.createData();
+    mycharacter output = null;
+      for (mycharacter c : data) {
+        if (c.equals(input)) {
+          output = c;
+            return output;
+        }
+  }
+    return output;
+}
+
+  public static ArrayList<String> Splitter(String input){
+      ArrayList<String> output = new ArrayList<String>();
+      ArrayList<mycharacter> stacks = new ArrayList<mycharacter>();
       int i = 0;
       while (i < input.length()) {
         // case senario for no spaces
@@ -30,28 +42,27 @@ public class test{
         }
         output.add(holder);
       }
-
-     if (isOperator(input.charAt(i))) {
-
+      if (isOperator(input.charAt(i))) {
+        mycharacter temp = convert(input.charAt(i));
+        while (stacks.size() > 0 && temp.isSlower(stacks.get(0))) {
+          output.add("" + stacks.remove(0));
         }
+        stacks.add(temp);
+        i += 1;
       }
-
-
-
-        output.add(holder);
-      }
-
-
-
+    if (input.charAt(i) == ' ') {
+      i += 1;
+    }
   }
+  while(stacks.size() > 0) {
+    output.add("" + stacks.remove(0));
+  }
+  return output;
+}
 
 
   public static void main(String[] args) {
-    String fourfunctiontester = "3.12+6";
-    Scanner reader = new Scanner(System.in);
-    System.out.println("Enter a Expression:");
-    double expression = reader.nextDouble();
-    Splitter(fourfunctiontester);
-
+    String testing = "1 + 2";
+    Splitter(testing);
   }
 }

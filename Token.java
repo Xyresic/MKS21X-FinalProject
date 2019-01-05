@@ -1,33 +1,42 @@
 import java.util.*;
 public class Token{
-  // value is the actual string version of the operator. This only exist to compare and keep track
-  private String value;
-  // different Functions and Operators have different priorities
-  // add and subtract is 2 multiply and divide is 3 power is 4 functions are 5
-  private int priority;
-  // -1 is left 1 is right quick and easy to read
-  private int direction;
-
-  // creates a Token
-  public Token(String a, int b,int c) {
-    value = a;
-    priority = b;
-    direction = c;
+  private String value; //String version of operator/function
+  private int priority; //priority of token when calculating
+  //addition and subtraction have priority 2
+  //multiplication and division have priority 3
+  //exponentiation has priority 4
+  //parentheses and functions have priority 5
+  private int direction; //direction of precedence, -1 is left, 1 is right
+  public static ArrayList<Token> tokens = new ArrayList<Token>() {{ //list of implemented operations/tokens
+    add(new Token("+",2,-1));
+    add(new Token("-",2,-1));
+    add(new Token("*",3,-1));
+    add(new Token("/",3,-1));
+  }};
+  public Token(String name, int precedence, int associativity){
+    value = name;
+    priority = precedence;
+    direction = associativity;
   }
-
-
-// a compareTO method for strings
-  public boolean equals(String input) {
+  public Token(String name){
+    value = name;
+    for(Token reference:tokens){
+      if(reference.value.equals(name)){
+        priority = reference.priority;
+        direction = reference.direction;
+      }
+    }
+  }
+  public boolean equals(String input) { //checks for equality
     return (value.equals(input));
   }
-
-// a char version so its easy
-  public boolean equals(char input) {
+  public boolean equals(char input) { //char version
     return (value.equals(input + ""));
   }
-
-// returns if its slower or same priority but left direction
-  public boolean isSlower(Token input) {
+  public boolean equals(Token input){ //Token version
+    return value.equals(input.value);
+  }
+  public boolean isSlower(Token input) { //checks if this token is slower or of the same precedence and left associaitve
     if (this.priority < input.priority) {
       return true;
     }
@@ -36,29 +45,7 @@ public class Token{
     }
     return false;
   }
-
-
-
-  // a toString cause why not
   public String toString() {
     return value;
-  }
-
-  // valueOf just in case I need it for debugging and other purposes
-  public String valueOf() {
-    return value;
-  }
-  // the great current list of Token that can easily migrate
-  public static ArrayList<Token> createData() {
-    ArrayList<Token> output = new ArrayList<Token>();
-    Token addition = new Token("+",2,-1);
-    Token subtract = new Token("-",2,-1);
-    Token multiply = new Token("*",3,-1);
-    Token divide = new Token("/",3,-1);
-    output.add(addition);
-    output.add(subtract);
-    output.add(multiply);
-    output.add(divide);
-    return output;
   }
 }

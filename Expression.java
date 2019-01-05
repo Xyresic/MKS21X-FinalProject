@@ -1,118 +1,60 @@
 import java.util.*;
-
 public class Expression{
-
-// isOperator is a method that obtains a character and checks if it is an operator by looping through a list of known operators
-  public static boolean isOperator(String input) {
-    ArrayList<Token> data = Token.createData();
-    //data of all the current Operators
-
-
-    for (Token c : data) {
-      // looks at all the Operators
-
-      if (c.equals(input)) {
-        // if it finds the operator returns true
+  public static boolean isToken(String input) { //checks if given input is an operator/function
+    for(Token reference : Token.tokens){
+      if(reference.equals(input)){
         return true;
       }
     }
-    // if it doesn't find one then return false
     return false;
   }
-
-
-
-
-  // char version so I don't make myself go crazy converting between string and char
-  public static boolean isOperator(char input) {
-    return isOperator(input + "");
+  public static boolean isToken(char input) { //char version
+    return isToken(input + "");
   }
-
-
-
-  // converts an extisting operator in string form to one in Token form
-  public static Token convert(String input) {
-    ArrayList<Token> data = Token.createData();
-    // looks at the data
-    Token output = null;
-    // this is the output variable
-      for (Token c : data) {
-        if (c.equals(input)) {
-          output = c;
-            return output;
-        }
-        // loops through existing operator to find if it exist. It returns it if it exist.
-  }
-    return output;
-    // returns null is it isn't a operator
-}
-
-
-  // char version so I don't make myself go crazy converting between string and char
-  public static Token convert(char input) {
-    return convert(input + "");
-}
-
   public static boolean isNumchar(char input) {
-    return Character.isDigit(input) || input == '.';
+    return Character.isDigit(input) || input == '.' || input == 'E' || input == 'B';
   }
-
-
-
-  // Shunting yard Algorithm :D
-  // https://en.wikipedia.org/wiki/Shunting-yard_algorithm I didn't look at any java code.
-  // It basically uses an output and a stacks. It holds numbers and end function/Operators in the stacks
-  // Then it combines the two
-  public static ArrayList<String> Splitter(String input){
-    //output is the thing that is gonna get returned
-      ArrayList<String> output = new ArrayList<String>();
-    // stacks is a stack of operators and functions
-      ArrayList<Token> stacks = new ArrayList<Token>();
-      // while loop :)
-      int i = 0;
-      while (i < input.length()) {
-        // case senario for no spaces
-        String holder = "";
-        // creates the number
-        int peroidcount = 0;
-        // only 1 peroid count is allowed
-        // if the character is a digit/. then it is considered a number;
-        if (isNumchar(input.charAt(i))){
-        while(i < input.length() && (isNumchar(input.charAt(i)))  && peroidcount < 2) {
-          if (input.charAt(i) == '.') {
-            peroidcount += 1;
+  // Shunting-yard Algorithm :D
+  // It uses an output queue and an operator stack in order to determine an order of operations
+  public static ArrayList<String> shunt(String input){
+    ArrayList<String> queue = new ArrayList<String>(); //queue is the output
+    ArrayList<Token> stack = new ArrayList<Token>(); //stack is the stack of operators/functions
+    int i = 0;
+    while (i < input.length()) {
+      String holder = ""; //this holds the current number/token in the case it is more than one character long
+      if (isNumchar(input.charAt(i))){ //if current char is a number...
+        int periodCount = 0; //counter for decimals, only one decimal point per number
+        while(i < input.length() && isNumchar(input.charAt(i))) { //...and subsequent charcters create a valid number...
+          if (input.charAt(i) == '.') { //counts periods
+            periodCount++;
           }
-          holder += input.charAt(i);
-          i += 1;
+          if(periodCount>1){ //detects invalid numbers with more than one decimal point
+            throw new IllegalArgumentException("A number has one or more extra decimal points.");
+          }
+          holder += input.charAt(i); //records subsequent digits
+          i++;
         }
-        // after there is no more digits to add it drops into the holder
-        output.add(holder);
+        queue.add(holder); //...add the number to the queue
       }
-      else if (isOperator(input.charAt(i))) {
-        Token temp = convert(input.charAt(i));
-        while (stacks.size() > 0 && temp.isSlower(stacks.get(0))) {
-          output.add("" + stacks.remove(0));
+      else if (isToken(input.charAt(i))) { //if the current char is a Token
+        Token temp = new Token(input.charAt(i)+""); //create a Token
+        while (stack.size() > 0 && temp.isSlower(stack.get(0))) { //if this token has lower pcredence...
+          queue.add("" + stack.remove(0)); //...add tokens of higher precedence to the output
         }
-        stacks.add(0,temp);
-        i += 1;
+        stack.add(0,temp); //add the token to the stack
+        i++;
       }
-      // skips all spaces to make it easier to work with
-    else if (input.charAt(i) == ' ') {
-      i += 1;
+      else if (input.charAt(i) == ' ') { //skips spaces
+        i++;
+      }
+      else if(!isNumchar(input.charAt(i)) && !isToken(input.charAt(i))){ //throw an exception for unsupported symbols
+        throw new IllegalArgumentException("Unrecognized symbol");
+      }
     }
-    // saftey, just so no infinite loops occur
-    else {
-    i += 1;
+    stack.forEach((x) -> queue.add(x.toString())); //drops stack on queue
+    return queue;
   }
-  }
-  // drops stacks into output.
-  while(stacks.size() > 0) {
-    output.add("" + stacks.remove(0));
-  }
-  return output;
-}
-
-  public static double simplfy(String operation, double a, double b) {
+  public static double simplify(String operation, double a, double b) { //applies the operations/functions
     if (operation.equals("+")) {
       return a + b;
     }
@@ -126,27 +68,20 @@ public class Expression{
       return a / b;
     }
     return 0;
-}
-
-    public static double evaulate(ArrayList<String> expression) {
-      int i = 2;
-      while (expression.size() > 1) {
-        if (isOperator(expression.get(i))) {
-          i = i - 2;
-          double a = Double.parseDouble(expression.remove(i));
-          double b = Double.parseDouble(expression.remove(i));
-          String oper = expression.remove(i);
-          expression.add(i,"" + simplfy(oper,a,b));
-        }
-        i += 1;
-      }
-      return Double.parseDouble(expression.remove(0));
-    }
-
-
-    public static double calculate(String input) {
-      return (evaulate(Splitter(input)));
-    }
-
-
   }
+  public static double evaluate(String expression) {
+    ArrayList<String> sorted = shunt(expression);
+    int i = 2;
+    while (sorted.size() > 1) {
+      if (isToken(sorted.get(i))) {
+        i = i - 2;
+        double a = Double.parseDouble(sorted.remove(i));
+        double b = Double.parseDouble(sorted.remove(i));
+        String oper = sorted.remove(i);
+        sorted.add(i,"" + simplify(oper,a,b));
+      }
+      i++;
+    }
+    return Double.parseDouble(sorted.remove(0));
+  }
+}

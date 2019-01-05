@@ -1,19 +1,25 @@
 # MKS21X-FinalProject
+
 APCS Project <(￣︶￣)↗[GO!] : Calculator
-😄
+
 Instructions:
 
-Development Log: 1/4/2019
-❀Both
-×Kevin
-👌Eric
- ❀Test.java and Mycharacter.java was created on 1/3/19
+Development Log: 
+
+🌸Both
+🎲Kevin
+
+🎋Eric
+
+ 1/4/2019
  
- ×Order of Operations Completed(add, subtract, multiply and divide)
+ 🌸Test.java and Mycharacter.java was created on 1/3/19
  
- ×Mycharacter file was changed into FunOper because it sounds better
+ 🎲Order of Operations Completed(add, subtract, multiply and divide)
  
- ❀Base Calculator.java was created on 1/4/19
+ 🎲Mycharacter file was changed into FunOper because it sounds better
  
- 👌Static Numbers added into Calculator(pi, phi, and e)
+ 🌸Base Calculator.java was created on 1/4/19
+ 
+ 🎋Static Numbers added into Calculator(pi, phi, and e)
  

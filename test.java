@@ -113,5 +113,41 @@ public class test{
   return output;
 }
 
-
+  public static double simplfy(String operation, double a, double b) {
+    if (operation.equals("+")) {
+      return a + b;
+    }
+    if (operation.equals("-")) {
+      return a - b;
+    }
+    if (operation.equals("*")) {
+      return a * b;
+    }
+    if (operation.equals("/")) {
+      return a / b;
+    }
+    return 0;
 }
+
+    public static double evaulate(ArrayList<String> expression) {
+      int i = 2;
+      while (expression.size() > 1) {
+        if (isOperator(expression.get(i))) {
+          i = i - 2;
+          double a = Double.parseDouble(expression.remove(i));
+          double b = Double.parseDouble(expression.remove(i));
+          String oper = expression.remove(i);
+          expression.add(i,"" + simplfy(oper,a,b));
+        }
+        i += 1;
+      }
+      return Double.parseDouble(expression.remove(0));
+    }
+
+
+    public static double calculate(String input) {
+      return (evaulate(Splitter(input)));
+    }
+
+
+  }

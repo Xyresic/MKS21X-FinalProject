@@ -4,6 +4,7 @@ public class Calculator{
   public static double e = 2.718281828459045;
   public static double phi = 1.618033988749895;
   private static double prevAns;
+  private static boolean rads = true;
   private double[] storedVal = new double[26];
   public void store(char name, double value){
     if((int)name<65 || (int)name>90){

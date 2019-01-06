@@ -69,6 +69,7 @@ public class Expression{
       }
       queue.add("" + stack.remove(0));
     }
+    //System.out.println(queue);
     return queue;
   }
   public static double simplify(String operation, double a, double b) { //applies the operations/functions
@@ -83,6 +84,9 @@ public class Expression{
     }
     if (operation.equals("/")) {
       return a / b;
+    }
+    if (operation.equals("^")) {
+      return Math.pow(a,b);
     }
     return 0;
   }

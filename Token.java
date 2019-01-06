@@ -12,6 +12,7 @@ public class Token{
     add(new Token("-",2,-1));
     add(new Token("*",3,-1));
     add(new Token("/",3,-1));
+    add(new Token("^",4,1));
   }};
   public Token(String name, int precedence, int associativity){
     value = name;

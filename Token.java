@@ -27,14 +27,22 @@ public class Token{
       }
     }
   }
-  public boolean equals(String input) { //checks for equality
-    return (value.equals(input));
+  public boolean equals(Object input){ //checks for equality
+    if(input==this){
+      return true;
+    }
+    if(input instanceof Token){
+      return value.equals(((Token)input).value);
+    }
+    if(input instanceof String){
+      return (value.equals(input));
+    }
+    else{
+      return false;
+    }
   }
-  public boolean equals(char input) { //char version
+  public boolean equals(char input){
     return (value.equals(input + ""));
-  }
-  public boolean equals(Token input){ //Token version
-    return value.equals(input.value);
   }
   public boolean isSlower(Token input) { //checks if this token is slower or of the same precedence and left associaitve
     if (this.priority < input.priority) {

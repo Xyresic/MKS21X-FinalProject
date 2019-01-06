@@ -1,10 +1,8 @@
 import java.util.*;
 public class Expression{
   public static boolean isToken(String input) { //checks if given input is an operator/function
-    for(Token reference : Token.tokens){
-      if(reference.equals(input)){
-        return true;
-      }
+    if(Token.tokens.contains(new Token(input))){
+      return true;
     }
     return false;
   }
@@ -36,10 +34,24 @@ public class Expression{
         }
         queue.add(holder); //...add the number to the queue
       }
+      else if(input.charAt(i)=='('){
+        stack.add(0,new Token("("));
+        i++;
+      }
+      else if(input.charAt(i)==')'){
+        while(stack.size()>0 && !stack.get(0).equals(new Token("("))){
+          queue.add("" + stack.remove(0));
+        }
+        if(!stack.contains(new Token("("))){
+          throw new IllegalArgumentException("There are one or more unmatched parentheses");
+        }
+        stack.remove(new Token("("));
+        i++;
+      }
       else if (isToken(input.charAt(i))) { //if the current char is a Token
         Token temp = new Token(input.charAt(i)+""); //create a Token
-        while (stack.size() > 0 && temp.isSlower(stack.get(0))) { //if this token has lower pcredence...
-          queue.add("" + stack.remove(0)); //...add tokens of higher precedence to the output
+        while (stack.size() > 0 && temp.isSlower(stack.get(0)) && !stack.get(0).equals(new Token("("))) { //if this token has lower pcredence...
+          queue.add("" + stack.remove(0)); //...add tokens of higher precedence to the queue
         }
         stack.add(0,temp); //add the token to the stack
         i++;
@@ -48,10 +60,15 @@ public class Expression{
         i++;
       }
       else if(!isNumchar(input.charAt(i)) && !isToken(input.charAt(i))){ //throw an exception for unsupported symbols
-        throw new IllegalArgumentException("Unrecognized symbol");
+        throw new IllegalArgumentException("Unrecognized symbol: "+input.charAt(i));
       }
     }
-    stack.forEach((x) -> queue.add(x.toString())); //drops stack on queue
+    while(stack.size()>0){ //drops stack on queue
+      if(stack.contains(new Token("("))){
+        throw new IllegalArgumentException("There are one or more unmatched parentheses");
+      }
+      queue.add("" + stack.remove(0));
+    }
     return queue;
   }
   public static double simplify(String operation, double a, double b) { //applies the operations/functions

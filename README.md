@@ -16,6 +16,7 @@ Development Log:
  1/5/19
  - Renamed Test to Expression and MyCharacter to Token to maintain consistency
  - Finished Framework for Calculator (method headers and main)
+ - Finished evaluating expressions
  - Combed through Expression and Token to fix spelling and simplify syntax
  - Implemented terminal evaluation of simple expressions containing only +,-,*,/
- - Implemented parentheses
+ - Implemented parentheses and exponentiation

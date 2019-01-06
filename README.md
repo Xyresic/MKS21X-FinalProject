@@ -18,3 +18,4 @@ Development Log:
  - Finished Framework for Calculator (method headers and main)
  - Combed through Expression and Token to fix spelling and simplify syntax
  - Implemented terminal evaluation of simple expressions containing only +,-,*,/
+ - Implemented parentheses

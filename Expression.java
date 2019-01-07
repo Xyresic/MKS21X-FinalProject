@@ -72,21 +72,21 @@ public class Expression{
     //System.out.println(queue);
     return queue;
   }
-  public static double simplify(String operation, double a, double b) { //applies the operations/functions
+  public static double simplify(String operation, double...inputs) { //applies the operations/functions
     if (operation.equals("+")) {
-      return a + b;
+      return inputs[0]+inputs[1];
     }
     if (operation.equals("-")) {
-      return a - b;
+      return inputs[0]-inputs[1];
     }
     if (operation.equals("*")) {
-      return a * b;
+      return inputs[0]*inputs[1];
     }
     if (operation.equals("/")) {
-      return a / b;
+      return inputs[0]/inputs[1];
     }
     if (operation.equals("^")) {
-      return Math.pow(a,b);
+      return Math.pow(inputs[0],inputs[1]);
     }
     return 0;
   }

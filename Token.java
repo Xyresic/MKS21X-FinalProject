@@ -58,4 +58,7 @@ public class Token{
   public String toString() {
     return value;
   }
+  public static boolean isOperator(Token check){
+    return check.value.length()==1;
+  }
 }

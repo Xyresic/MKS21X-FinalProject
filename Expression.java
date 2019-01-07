@@ -34,18 +34,18 @@ public class Expression{
         }
         queue.add(holder); //...add the number to the queue
       }
-      else if(input.charAt(i)=='('){
+      else if(input.charAt(i)=='('){ //if open parentheses, add it to stack
         stack.add(0,new Token("("));
         i++;
       }
-      else if(input.charAt(i)==')'){
+      else if(input.charAt(i)==')'){ //if close parentheses, pop tokens until open parentheses is found
         while(stack.size()>0 && !stack.get(0).equals(new Token("("))){
           queue.add("" + stack.remove(0));
         }
-        if(!stack.contains(new Token("("))){
+        if(!stack.contains(new Token("("))){ //if there is no open parentheses, throw an error
           throw new IllegalArgumentException("There are one or more unmatched parentheses");
         }
-        stack.remove(new Token("("));
+        stack.remove(new Token("(")); //remove unnecessary open parentheses
         i++;
       }
       else if (isToken(input.charAt(i))) { //if the current char is a Token

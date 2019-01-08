@@ -20,3 +20,8 @@ Development Log:
  - Combed through Expression and Token to fix spelling and simplify syntax
  - Implemented terminal evaluation of simple expressions containing only +,-,*,/
  - Implemented parentheses and exponentiation
+
+ 1/7/19
+ - Temporary solution to Order of Operation error
+ - Added More comments and Parenthis
+ - Made Code more readable

@@ -9,11 +9,8 @@ public class Expression{
   public static boolean isToken(char input) { //char version
     return isToken(input + "");
   }
-  public static boolean isNumchar(char input) {
+  public static boolean isNumchar(char input) { //checks if a character is part of a number
     return Character.isDigit(input) || input == '.' || input == 'E' || input == 'B';
-  }
-  public static boolean isFunchar(char input) {
-    return Character.isLetter(input);
   }
   // Shunting-yard Algorithm :D
   // It uses an output queue and an operator stack in order to determine an order of operations
@@ -22,7 +19,8 @@ public class Expression{
     ArrayList<Token> stack = new ArrayList<Token>(); //stack is the stack of operators/functions
     int i = 0;
     while (i < input.length()) {
-      String holder = ""; //this holds the current number/token in the case it is more than one character long
+      String holder = ""; //this holds the current number in the case it is more than one character long
+      boolean inFunction = false; //saves whether the current character is inside a function
       if (isNumchar(input.charAt(i))){ //if current char is a number...
         int periodCount = 0; //counter for decimals, only one decimal point per number
         while(i < input.length() && isNumchar(input.charAt(i))) { //...and subsequent charcters create a valid number...
@@ -37,24 +35,42 @@ public class Expression{
         }
         queue.add(holder); //...add the number to the queue
       }
-      if (input.charAt(i) == ',') {
-        while(stack.size()>0 && !stack.get(0).equals(new Token("("))){
+      else if (Character.isLetter(input.charAt(i))) { //if the current char is a letter...
+        while(i<input.length() && Character.isLetter(input.charAt(i))){ //...add subsequent letters to a temporary holder
+          holder+=input.charAt(i);
+          i++;
+        }
+        if(!isToken(holder)){ //if the string is not a valid function, throw an error
+          throw new IllegalArgumentException("Unrecognized function: "+holder);
+        }
+        Token temp = new Token(holder); //otherwise, create a Token
+        while (stack.size() > 0 && temp.isSlower(stack.get(0)) && !stack.get(0).equals(new Token("("))) { //if this token has lower pcredence...
+          queue.add("" + stack.remove(0)); //...add tokens of higher precedence to the queue
+        }
+        if(temp.toString().length()>1){ //if the token is a function, set inFunction to true
+          inFunction=true;
+        }
+        stack.add(0,temp); //add the token to the stack
+        i++;
+      }
+      else if (input.charAt(i) == ',') { //commas function as right parentheses in functions
+        if(!inFunction){ //if there is a comma outaside of a function, throw an error
+          throw new IllegalArgumentException("There are one or more commas outside of a function");
+        }
+        if(/*temporary*/){
+          throw new IllegalArgumentException("There are extra commas");
+        }
+        while(stack.size()>0 && !stack.get(0).equals(new Token("("))){ //pop operators until left parentheses
           queue.add("" + stack.remove(0));
         }
         i++;
       }
-      if (isFunchar(input.charAt(i))){
-        while (isFunchar(input.charAt(i))) {
-          holder += input.charAt(i);
-          i++;
-        }
-        stack.add(new Token(holder)); //...add the number to the queue
-        }
       else if(input.charAt(i)=='('){ //if open parentheses, add it to stack
         stack.add(0,new Token("("));
         i++;
       }
       else if(input.charAt(i)==')'){ //if close parentheses, pop tokens until open parentheses is found
+        inFunction = false;
         while(stack.size()>0 && !stack.get(0).equals(new Token("("))){
           queue.add("" + stack.remove(0));
         }
@@ -64,18 +80,10 @@ public class Expression{
         stack.remove(new Token("(")); //remove unnecessary open parentheses
         i++;
       }
-      else if (isToken(input.charAt(i))) { //if the current char is a Token
-        Token temp = new Token(input.charAt(i)+""); //create a Token
-        while (stack.size() > 0 && temp.isSlower(stack.get(0)) && !stack.get(0).equals(new Token("("))) { //if this token has lower pcredence...
-          queue.add("" + stack.remove(0)); //...add tokens of higher precedence to the queue
-        }
-        stack.add(0,temp); //add the token to the stack
-        i++;
-      }
       else if (input.charAt(i) == ' ') { //skips spaces
         i++;
       }
-      else if(!isNumchar(input.charAt(i)) && !isToken(input.charAt(i))){ //throw an exception for unsupported symbols
+      else { //if nothing supported is found, throw an error
         throw new IllegalArgumentException("Unrecognized symbol: "+input.charAt(i));
       }
     }

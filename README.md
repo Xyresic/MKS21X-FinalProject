@@ -22,6 +22,6 @@ Development Log:
  - Implemented parentheses and exponentiation
 
  1/7/19
- - Temporary solution to Order of Operation error
- - Added More comments and Parenthis
- - Made Code more readable
+ - Solved order of operations error from undetected commas
+ - Added more comments and parentheses
+ - Made code more readable

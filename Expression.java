@@ -57,7 +57,7 @@ public class Expression{
         if(!inFunction){ //if there is a comma outaside of a function, throw an error
           throw new IllegalArgumentException("There are one or more commas outside of a function");
         }
-        if(/*temporary*/){
+        if(/*temporary*/ false){
           throw new IllegalArgumentException("There are extra commas");
         }
         while(stack.size()>0 && !stack.get(0).equals(new Token("("))){ //pop operators until left parentheses
@@ -112,6 +112,24 @@ public class Expression{
     if (operation.equals("^")) {
       return Math.pow(inputs[0],inputs[1]);
     }
+    if (operation.equals("%")) {
+      return inputs[0] % inputs[1];
+    }
+    if (operation.equals("root")) {
+      return Math.pow(inputs[0],1 / inputs[1]);
+    }
+    if (operation.equals("abs")) {
+      return Math.abs(inputs[0]);
+    }
+    if (operation.equals("floor")) {
+      return Math.floor(inputs[0]);
+    }
+    if (operation.equals("ceil")) {
+      return Math.ceil(inputs[0]);
+    }
+  //  if (operation.equals("gcd")) {
+  //    return Algorithms.gcd(inputs[0],inputs[1]);
+//}
     return 0;
   }
   public static double evaluate(String expression) {

@@ -127,9 +127,12 @@ public class Expression{
     if (operation.equals("ceil")) {
       return Math.ceil(inputs[0]);
     }
-  //  if (operation.equals("gcd")) {
-  //    return Algorithms.gcd(inputs[0],inputs[1]);
-//}
+    if (operation.equals("gcd")) {
+      return Algorithms.gcd(inputs[0],inputs[1]);
+    }
+    if (operation.equals("log")) {
+      return Math.log(inputs[0]);
+    }
     return 0;
   }
   public static double evaluate(String expression) {

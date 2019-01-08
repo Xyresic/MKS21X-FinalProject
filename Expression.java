@@ -12,6 +12,9 @@ public class Expression{
   public static boolean isNumchar(char input) {
     return Character.isDigit(input) || input == '.' || input == 'E' || input == 'B';
   }
+  public static boolean isFunchar(char input) {
+    return Character.isLetter(input);
+  }
   // Shunting-yard Algorithm :D
   // It uses an output queue and an operator stack in order to determine an order of operations
   public static ArrayList<String> shunt(String input){
@@ -34,6 +37,19 @@ public class Expression{
         }
         queue.add(holder); //...add the number to the queue
       }
+      if (input.charAt(i) == ',') {
+        while(stack.size()>0 && !stack.get(0).equals(new Token("("))){
+          queue.add("" + stack.remove(0));
+        }
+        i++;
+      }
+      if (isFunchar(input.charAt(i))){
+        while (isFunchar(input.charAt(i))) {
+          holder += input.charAt(i);
+          i++;
+        }
+        stack.add(new Token(holder)); //...add the number to the queue
+        }
       else if(input.charAt(i)=='('){ //if open parentheses, add it to stack
         stack.add(0,new Token("("));
         i++;

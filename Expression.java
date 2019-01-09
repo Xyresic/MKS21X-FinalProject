@@ -130,6 +130,9 @@ public class Expression{
     if (operation.equals("gcd")) {
       return Algorithms.gcd(inputs[0],inputs[1]);
     }
+    if (operation.equals("lcm")) {
+      return inputs[0]*inputs[1]/Algorithms.gcd(inputs[0],inputs[1]);
+    }
     if (operation.equals("log")) {
       return Math.log(inputs[0]);
     }

@@ -25,3 +25,9 @@ Development Log:
  - Solved order of operations error from undetected commas
  - Added more comments and parentheses
  - Made code more readable
+
+ 1/8/19
+ - Added functions to simplify
+
+ 1/9/19
+ - Added functions as tokens

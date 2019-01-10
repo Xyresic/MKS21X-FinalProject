@@ -130,6 +130,9 @@ public class Expression{
     if (operation.equals("gcd")) {
       return Algorithms.gcd(inputs[0],inputs[1]);
     }
+    if (operation.equals("lcm")) {
+      return inputs[0]*inputs[1]/Algorithms.gcd(inputs[0],inputs[1]);
+    }
     if (operation.equals("log")) {
       return Math.log(inputs[0]);
     }
@@ -137,14 +140,22 @@ public class Expression{
   }
   public static double evaluate(String expression) {
     ArrayList<String> sorted = shunt(expression);
-    int i = 2;
+    int i = 0;
     while (sorted.size() > 1) {
       if (isToken(sorted.get(i))) {
-        i = i - 2;
+        Token temp = new Token(sorted.get(i));
+        i = i - temp.getArgs();
         double a = Double.parseDouble(sorted.remove(i));
-        double b = Double.parseDouble(sorted.remove(i));
+        if(temp.getArgs()==2){
+          double b = Double.parseDouble(sorted.remove(i));
+        }
         String oper = sorted.remove(i);
-        sorted.add(i,"" + simplify(oper,a,b));
+        if(temp.getArgs()==1){
+          sorted.add(i,"" + simplify(oper,a));
+        }
+        else if(temp.getArgs()==2){
+          sorted.add(i,"" + simplify(oper,a,b));
+        }
       }
       i++;
     }

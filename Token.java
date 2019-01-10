@@ -40,11 +40,11 @@ public class Token{
       }
     }
   }
-  public int getArgs(Token input){
-    return input.parameters;
+  public int getArgs(){
+    return parameters;
   }
-  public int getDirection(Token input){
-    return input.direction;
+  public int getDirection(){
+    return direction;
   }
   public boolean equals(Object input){ //checks for equality
     if(input==this){

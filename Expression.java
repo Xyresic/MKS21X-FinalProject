@@ -18,9 +18,9 @@ public class Expression{
     ArrayList<String> queue = new ArrayList<String>(); //queue is the output
     ArrayList<Token> stack = new ArrayList<Token>(); //stack is the stack of operators/functions
     int i = 0;
+    boolean inFunction = false; //saves whether the current character is inside a function
     while (i < input.length()) {
       String holder = ""; //this holds the current number in the case it is more than one character long
-      boolean inFunction = false; //saves whether the current character is inside a function
       if (isNumchar(input.charAt(i))){ //if current char is a number...
         int periodCount = 0; //counter for decimals, only one decimal point per number
         while(i < input.length() && isNumchar(input.charAt(i))) { //...and subsequent charcters create a valid number...
@@ -35,6 +35,14 @@ public class Expression{
         }
         queue.add(holder); //...add the number to the queue
       }
+      else if (isToken(input.charAt(i))) { //if the current char is a Token
+        Token temp = new Token(input.charAt(i)+"");
+        while (stack.size() > 0 && temp.isSlower(stack.get(0)) && !stack.get(0).equals(new Token("("))) { //if this token has lower pcredence...
+          queue.add("" + stack.remove(0)); //...add tokens of higher precedence to the queue
+        }
+        stack.add(0,temp); //add the token to the stack
+        i++;
+      }
       else if (Character.isLetter(input.charAt(i))) { //if the current char is a letter...
         while(i<input.length() && Character.isLetter(input.charAt(i))){ //...add subsequent letters to a temporary holder
           holder+=input.charAt(i);
@@ -47,19 +55,16 @@ public class Expression{
         while (stack.size() > 0 && temp.isSlower(stack.get(0)) && !stack.get(0).equals(new Token("("))) { //if this token has lower pcredence...
           queue.add("" + stack.remove(0)); //...add tokens of higher precedence to the queue
         }
-        if(temp.toString().length()>1){ //if the token is a function, set inFunction to true
-          inFunction=true;
-        }
+        inFunction=true;
         stack.add(0,temp); //add the token to the stack
-        i++;
       }
       else if (input.charAt(i) == ',') { //commas function as right parentheses in functions
         if(!inFunction){ //if there is a comma outaside of a function, throw an error
           throw new IllegalArgumentException("There are one or more commas outside of a function");
         }
-        if(/*temporary*/ false){
+        /*if(temporary false){
           throw new IllegalArgumentException("There are extra commas");
-        }
+        }*/
         while(stack.size()>0 && !stack.get(0).equals(new Token("("))){ //pop operators until left parentheses
           queue.add("" + stack.remove(0));
         }
@@ -148,13 +153,12 @@ public class Expression{
         double a = Double.parseDouble(sorted.remove(i));
         if(temp.getArgs()==2){
           double b = Double.parseDouble(sorted.remove(i));
-        }
-        String oper = sorted.remove(i);
-        if(temp.getArgs()==1){
-          sorted.add(i,"" + simplify(oper,a));
-        }
-        else if(temp.getArgs()==2){
+          String oper = sorted.remove(i);
           sorted.add(i,"" + simplify(oper,a,b));
+        }
+        else{
+          String oper = sorted.remove(i);
+          sorted.add(i,"" + simplify(oper,a));
         }
       }
       i++;

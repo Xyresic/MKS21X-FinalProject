@@ -125,7 +125,7 @@ public class Expression{
       return Math.pow(inputs[0],inputs[1]);
     }
     if (operation.equals("%")) {
-      return inputs[0] % inputs[1];
+      return Math.floorMod((long)inputs[0],(long)inputs[1]);
     }
     if (operation.equals("root")) {
       if(inputs[0]==2){

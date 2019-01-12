@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 public class Expression{
   public static boolean isToken(String input) { //checks if given input is an operator/function
     if(Token.tokens.contains(new Token(input))){
@@ -49,15 +50,32 @@ public class Expression{
           holder+=input.charAt(i);
           i++;
         }
-        if(!isToken(holder)){ //if the string is not a valid function, throw an error
-          throw new IllegalArgumentException("Unrecognized function: "+holder);
+        /*if(holder.equals("PREV")){ //previous answer
+          queue.add(Calculator.prevAns+"");
         }
-        Token temp = new Token(holder); //otherwise, create a Token
-        while (stack.size() > 0 && temp.isSlower(stack.get(0)) && !stack.get(0).equals(new Token("("))) { //if this token has lower pcredence...
-          queue.add("" + stack.remove(0)); //...add tokens of higher precedence to the queue
+        else if(holder.equals("PI")){
+          queue.add(Math.PI+"");
         }
-        curFunction=temp;
-        stack.add(0,temp); //add the token to the stack
+        else if(holder.equals("E")){
+          queue.add(Math.E+"");
+        }
+        else if(holder.equals("PHI")){
+          queue.add(Calculator.phi+"");
+        }
+        else if(holder.length()==1 && (int)holder.charAt(0)>=65 && (int)holder.charAt(0)<=90){
+          queue.add(Calculator.storedVal[(int)holder.charAt(0)-65]+"");
+        }
+        else*/ if(!isToken(holder)){ //if the string is not a valid function, throw an error
+          throw new IllegalArgumentException("Unrecognized token: "+holder);
+        }
+        else{ //otherwise, treat the string as a valid function
+          Token temp = new Token(holder);
+          while (stack.size() > 0 && temp.isSlower(stack.get(0)) && !stack.get(0).equals(new Token("("))) { //if this token has lower pcredence...
+            queue.add("" + stack.remove(0)); //...add tokens of higher precedence to the queue
+          }
+          curFunction=temp;
+          stack.add(0,temp); //add the token to the stack
+        }
       }
       else if (input.charAt(i) == ',') { //commas function as right parenthesis in functions
         if(curFunction.toString().length()==0){ //if there is a comma outaside of a function, throw an error
@@ -129,10 +147,10 @@ public class Expression{
     }
     if (operation.equals("root")) {
       if(inputs[0]==2){
-          return Math.sqrt(inputs[1]);
+        return Math.sqrt(inputs[1]);
       }
       if(inputs[0]==3){
-          return Math.cbrt(inputs[1]);
+        return Math.cbrt(inputs[1]);
       }
       return Math.pow(inputs[1],1/inputs[0]);
     }
@@ -160,7 +178,7 @@ public class Expression{
     return 0;
   }
   public static double evaluate(String expression) { //calculates value of given expression
-    ArrayList<String> sorted = shunt(expression); //parses Sting using shunting-yard
+    ArrayList<String> sorted = shunt(expression); //parses string using shunting-yard
     int i = 0;
     while (sorted.size() > 1) { //while there are tokens...
       if (isToken(sorted.get(i))) { //...if the token is a function or operation...

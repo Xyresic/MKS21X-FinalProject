@@ -31,7 +31,7 @@ public class graphing{
       img.setRGB(x, y, p);
     }
     try{
-      f = new File("C:\\Users\\HP PC\\git\\MKS21X-FinalProject\\Output.png");
+      f = new File("user.dir/");
       ImageIO.write(img, "png", f);
     }catch(IOException e){
       System.out.println("Error: " + e);

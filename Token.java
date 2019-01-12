@@ -20,8 +20,9 @@ public class Token{
     add(new Token("abs",5,0,1));
     add(new Token("floor",5,0,1));
     add(new Token("ceil",5,0,1));
-    add(new Token("gcd",5,0,2));
+    add(new Token("gcf",5,0,2));
     add(new Token("lcm",5,0,2));
+    add(new Token("ln",5,0,1));
     add(new Token("log",5,0,2));
   }};
   public Token(String name, int precedence, int associativity, int arguments){

@@ -23,11 +23,15 @@ Development Log:
 
  1/7/19
  - Solved order of operations error from undetected commas
- - Added more comments and parentheses
+ - Fixed some bugs with parentheses
+ - Added more comments
  - Made code more readable
 
- 1/8/19
+ 1/10/19
  - Added functions to simplify
-
- 1/9/19
  - Added functions as tokens
+ - Implemented function evaluating
+
+ 1/12/19
+ - Added errors for incorrect comma usage
+ - Added comments for methods that changed due to function implementation

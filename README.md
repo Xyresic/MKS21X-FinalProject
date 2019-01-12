@@ -35,3 +35,4 @@ Development Log:
  1/12/19
  - Added errors for incorrect comma usage
  - Added comments for methods that changed due to function implementation
+ - Added support for negative values

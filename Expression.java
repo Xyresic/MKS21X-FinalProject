@@ -217,8 +217,7 @@ public class Expression{
     }
     return 0;
   }
-  public static double evaluate(String expression) throws FileNotFoundException { //calculates value of given expression
-    ArrayList<String> sorted = shunt(expression); //parses string using shunting-yard
+  public static double evaluate(ArrayList<String> sorted) throws FileNotFoundException {
     int i = 0;
     while (sorted.size() > 1) { //while there are tokens...
       if (isToken(sorted.get(i))) { //...if the token is a function or operation...
@@ -238,4 +237,13 @@ public class Expression{
     }
     return Double.parseDouble(sorted.remove(0));
   }
+  public static double evaluate(String expression) throws FileNotFoundException { //calculates value of given expression
+    ArrayList<String> sorted = shunt(expression); //parses string using shunting-yard
+    return evaluate(sorted);
+  }
+
+
+
+
+
 }

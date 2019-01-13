@@ -22,6 +22,7 @@ public class Expression{
     Token curFunction = new Token(""); //stores the current function
     int commaCount = 0; //stores number of commas
     while (i < input.length()) {
+
       String holder = ""; //this holds the current number in the case it is more than one character long
       if (isNumchar(input.charAt(i))){ //if current char is a number...
         int periodCount = 0; //counter for decimals, only one decimal point per number
@@ -60,13 +61,17 @@ public class Expression{
           queue.add(Math.E+"");
         } else if(holder.equals("phi")){
           queue.add(Calculator.phi+"");
-        } else if(holder.length()==1 && (int)holder.charAt(0)>=65 && (int)holder.charAt(0)<=90){ //stored variables
+        } else if(holder.equals("x")){
+          queue.add("x");
+        }
+         else if(holder.length()==1 && (int)holder.charAt(0)>=65 && (int)holder.charAt(0)<=90){ //stored variables
           Scanner scanner = new Scanner(new File("data.txt"));
           for(int counter=0;counter<(int)holder.charAt(0)-63;counter++){ //loop through file with stored variables
             scanner.next();
           }
           queue.add(scanner.next());
-        } else if(!isToken(holder)){ //if the string is not a valid function, throw an error
+        }
+         else if(!isToken(holder)){ //if the string is not a valid function, throw an error
           throw new IllegalArgumentException("Unrecognized token: "+holder);
         } else{ //otherwise, treat the string as a valid function
           Token temp = new Token(holder);
@@ -108,7 +113,8 @@ public class Expression{
         i++;
       } else if (input.charAt(i) == ' ') { //skips spaces
         i++;
-      } else { //if nothing supported is found, throw an error
+      }
+       else { //if nothing supported is found, throw an error
         throw new IllegalArgumentException("Unrecognized symbol: "+input.charAt(i));
       }
     }

@@ -82,5 +82,9 @@ public class Calculator{
       rewrite();
       System.out.println(data[0].substring(0,data[0].length()-1));
     }
+    if(args.length == 2 && args[0].equals("Graph")){ //checks if user inputted an expression
+      Algebra.graph(args[1]);
+      System.out.println("Done Check Output.png");
+    }
   }
 }

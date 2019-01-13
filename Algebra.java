@@ -19,9 +19,8 @@ public class Algebra {
     ArrayList<String> sorted = Expression.shunt(input);
     return solve(input,x);
   }
-  //public static void graph(String expression) throws FileNotFoundException {
-  //ArrayList<String> sorted = Expression.shunt(expression);
-  public static void graph(ArrayList<String> sorted) throws FileNotFoundException {
+  public static void graph(String expression) throws FileNotFoundException {
+  ArrayList<String> sorted = Expression.shunt(expression);
   System.out.println(sorted);
   int x = 0;
   int y = 0;

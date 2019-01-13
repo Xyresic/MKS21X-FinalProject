@@ -25,9 +25,6 @@ public class Calculator{
     }
     writer.close();
   }
-  public static void help(){ //prints directions
-    //To be implemented
-  }
   public static boolean isNumeric(String test){ //checks if given string is a number
     for(int i = 0; i<test.length(); i++){
       if(!Expression.isNumchar(test.charAt(i))){

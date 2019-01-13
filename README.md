@@ -2,7 +2,7 @@
 
 APCS Project <(￣︶￣)↗[GO!] : Calculator
 
-Instructions:
+Instructions: This calculator is entirely terminal based. Simply compile and run. 
 
 Development Log:
 

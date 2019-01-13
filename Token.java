@@ -27,6 +27,18 @@ public class Token{
     add(new Token("log",5,0,2));
     add(new Token("choose",5,0,2));
     add(new Token("permute",5,0,2));
+    add(new Token("sin",5,0,1));
+    add(new Token("cos",5,0,1));
+    add(new Token("tan",5,0,1));
+    add(new Token("sec",5,0,1));
+    add(new Token("csc",5,0,1));
+    add(new Token("cot",5,0,1));
+    add(new Token("asin",5,0,1));
+    add(new Token("acos",5,0,1));
+    add(new Token("atan",5,0,1));
+    add(new Token("sinh",5,0,1));
+    add(new Token("cosh",5,0,1));
+    add(new Token("tanh",5,0,1));
   }};
   public Token(String name, int precedence, int associativity, int arguments){
     value = name;

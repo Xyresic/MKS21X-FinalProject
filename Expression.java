@@ -179,6 +179,42 @@ public class Expression{
     if (operation.equals("permute")) {
       return Token.permute(inputs[0],inputs[1]);
     }
+    if (operation.equals("sin")) {
+      return Math.sin(Calculator.isRads()? inputs[0]:inputs[0]*Math.PI/180);
+    }
+    if (operation.equals("cos")) {
+      return Math.cos(Calculator.isRads()? inputs[0]:inputs[0]*Math.PI/180);
+    }
+    if (operation.equals("tan")) {
+      return Math.tan(Calculator.isRads()? inputs[0]:inputs[0]*Math.PI/180);
+    }
+    if (operation.equals("sec")) {
+      return 1/Math.cos(Calculator.isRads()? inputs[0]:inputs[0]*Math.PI/180);
+    }
+    if (operation.equals("csc")) {
+      return 1/Math.sin(Calculator.isRads()? inputs[0]:inputs[0]*Math.PI/180);
+    }
+    if (operation.equals("cot")) {
+      return 1/Math.tan(Calculator.isRads()? inputs[0]:inputs[0]*Math.PI/180);
+    }
+    if (operation.equals("asin")) {
+      return Calculator.isRads()? Math.asin(inputs[0]):Math.asin(inputs[0])*180/Math.PI;
+    }
+    if (operation.equals("acos")) {
+      return Calculator.isRads()? Math.asin(inputs[0]):Math.asin(inputs[0])*180/Math.PI;
+    }
+    if (operation.equals("atan")) {
+      return Calculator.isRads()? Math.asin(inputs[0]):Math.asin(inputs[0])*180/Math.PI;
+    }
+    if (operation.equals("sinh")) {
+      return Math.sinh(inputs[0]);
+    }
+    if (operation.equals("cosh")) {
+      return Math.cosh(inputs[0]);
+    }
+    if (operation.equals("tanh")) {
+      return Math.tanh(inputs[0]);
+    }
     return 0;
   }
   public static double evaluate(String expression) throws FileNotFoundException { //calculates value of given expression

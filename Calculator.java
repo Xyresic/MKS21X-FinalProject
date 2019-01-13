@@ -36,6 +36,9 @@ public class Calculator{
     }
     return true;
   }
+  public static boolean isRads(){
+    return data[1].equals("radians\n");
+  }
   public static void main(String[] args) throws FileNotFoundException {
     scanner = new Scanner(new File("data.txt")); //intializes scanner
     for(int i  = 0; i<28; i++){ //intializes data

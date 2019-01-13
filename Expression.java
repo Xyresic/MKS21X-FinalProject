@@ -36,16 +36,14 @@ public class Expression{
           i++;
         }
         queue.add(holder); //...add the number to the queue
-      }
-      else if (isToken(input.charAt(i))) { //if the current char is a Token
+      } else if (isToken(input.charAt(i))) { //if the current char is a Token
         Token temp = new Token(input.charAt(i)+"");
         while (stack.size() > 0 && temp.isSlower(stack.get(0)) && !stack.get(0).equals(new Token("("))) { //if this token has lower pcredence...
           queue.add("" + stack.remove(0)); //...add tokens of higher precedence to the queue
         }
         stack.add(0,temp); //add the token to the stack
         i++;
-      }
-      else if (Character.isLetter(input.charAt(i))) { //if the current char is a letter...
+      } else if (Character.isLetter(input.charAt(i))) { //if the current char is a letter...
         while(i<input.length() && Character.isLetter(input.charAt(i))){ //...add subsequent letters to a temporary holder
           holder+=input.charAt(i);
           i++;
@@ -53,27 +51,21 @@ public class Expression{
         if(holder.equals("PREV")){ //previous answer
           Scanner scanner = new Scanner(new File("data.txt"));
           queue.add(scanner.next());
-        }
-        else if(holder.equals("pi")){ //detecting constants
+        } else if(holder.equals("pi")){ //detecting constants
           queue.add(Math.PI+"");
-        }
-        else if(holder.equals("e")){
+        } else if(holder.equals("e")){
           queue.add(Math.E+"");
-        }
-        else if(holder.equals("phi")){
+        } else if(holder.equals("phi")){
           queue.add(Calculator.phi+"");
-        }
-        else if(holder.length()==1 && (int)holder.charAt(0)>=65 && (int)holder.charAt(0)<=90){ //stored variables
+        } else if(holder.length()==1 && (int)holder.charAt(0)>=65 && (int)holder.charAt(0)<=90){ //stored variables
           Scanner scanner = new Scanner(new File("data.txt"));
           for(int counter=0;counter<(int)holder.charAt(0)-63;counter++){ //loop through file with stored variables
             scanner.next();
           }
           queue.add(scanner.next());
-        }
-        else if(!isToken(holder)){ //if the string is not a valid function, throw an error
+        } else if(!isToken(holder)){ //if the string is not a valid function, throw an error
           throw new IllegalArgumentException("Unrecognized token: "+holder);
-        }
-        else{ //otherwise, treat the string as a valid function
+        } else{ //otherwise, treat the string as a valid function
           Token temp = new Token(holder);
           while (stack.size() > 0 && temp.isSlower(stack.get(0)) && !stack.get(0).equals(new Token("("))) { //if this token has lower pcredence...
             queue.add("" + stack.remove(0)); //...add tokens of higher precedence to the queue
@@ -81,8 +73,7 @@ public class Expression{
           curFunction=temp;
           stack.add(0,temp); //add the token to the stack
         }
-      }
-      else if (input.charAt(i) == ',') { //commas function as right parenthesis in functions
+      } else if (input.charAt(i) == ',') { //commas function as right parenthesis in functions
         if(curFunction.toString().length()==0){ //if there is a comma outaside of a function, throw an error
           throw new IllegalArgumentException("There are one or more commas outside of a function");
         }
@@ -91,12 +82,10 @@ public class Expression{
           queue.add("" + stack.remove(0));
         }
         i++;
-      }
-      else if(input.charAt(i)=='('){ //if open parenthesis, add it to stack
+      } else if(input.charAt(i)=='('){ //if open parenthesis, add it to stack
         stack.add(0,new Token("("));
         i++;
-      }
-      else if(input.charAt(i)==')'){ //if close parenthesis, pop tokens until open parenthesis is found
+      } else if(input.charAt(i)==')'){ //if close parenthesis, pop tokens until open parenthesis is found
         if(curFunction.toString().length()>0 && commaCount!=curFunction.getArgs()-1){ //if there is an incorrect number of commas, throw an error
           throw new IllegalArgumentException("Missing or extraneous commas");
         }
@@ -114,11 +103,9 @@ public class Expression{
         }
         stack.remove(0); //remove unnecessary open parenthesis
         i++;
-      }
-      else if (input.charAt(i) == ' ') { //skips spaces
+      } else if (input.charAt(i) == ' ') { //skips spaces
         i++;
-      }
-      else { //if nothing supported is found, throw an error
+      } else { //if nothing supported is found, throw an error
         throw new IllegalArgumentException("Unrecognized symbol: "+input.charAt(i));
       }
     }
@@ -194,8 +181,7 @@ public class Expression{
           double b = Double.parseDouble(sorted.remove(i)); //...store the second parameter...
           String oper = sorted.remove(i); //...store the token...
           sorted.add(i,"" + simplify(oper,a,b)); //...calculate value
-        }
-        else{ //if the token takes one parameter...
+        } else{ //if the token takes one parameter...
           String oper = sorted.remove(i); //...store the token...
           sorted.add(i,"" + simplify(oper,a)); //...calculate value
         }

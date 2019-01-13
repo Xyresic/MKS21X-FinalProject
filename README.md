@@ -36,3 +36,7 @@ Development Log:
  - Added errors for incorrect comma usage
  - Added comments for methods that changed due to function implementation
  - Added support for negative values
+ - Implemented storing
+ - Implemented previous answer
+ - Added support for pi, e, and phi
+ - Added support for storing previous answer, constants, and other stored variables

@@ -40,3 +40,5 @@ Development Log:
  - Implemented previous answer
  - Added support for pi, e, and phi
  - Added support for storing previous answer, constants, and other stored variables
+ - Implemented trig and hyperbolic trig functions
+ - Implemented toggling between radians and degrees

@@ -79,5 +79,9 @@ public class Calculator{
       rewrite();
       System.out.println(data[0].substring(0,data[0].length()-1));
     }
+    if(args.length == 2 && args[0].equals("graph") && args[1].contains("x")){ //checks if user inputted a function
+      Graph.graph(args[1]);
+      System.out.println("Graph.png updated");
+    }
   }
 }

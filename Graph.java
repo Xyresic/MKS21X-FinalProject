@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-public class Algebra {
+public class Graph {
   public static double solve(ArrayList<String> input, double substitute) throws FileNotFoundException { //solves for y for given x-value
     for(int i = 0; i < input.size(); i++) {
       if (input.get(i).equals("x")) {
@@ -13,10 +13,11 @@ public class Algebra {
     return Expression.evaluate(input);
   }
   public static double solve(String input, double x) throws FileNotFoundException{ //string version
-    ArrayList<String> sorted = Expression.shunt(input);
+    ArrayList<String> sorted = Expression.shunt(input,"graph");
     return solve(input,x);
   }
-  public static void graph(ArrayList<String> sorted) throws FileNotFoundException { //creates an image file of the given equation
+  public static void graph(String expression) throws FileNotFoundException {
+    ArrayList<String> sorted = Expression.shunt(expression,"graph");
     int x = 0;
     int y = 0;
     int width = 2000;
@@ -24,9 +25,10 @@ public class Algebra {
     BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     File f;
     int color =  (120<<24) | (255<<16) | (255<<8) | 255; //sets image background to white
-    for(x;x < height; x++) {
-      for (y; y < width; y++)
-      img.setRGB(x, y, color);
+    for(x = 0;x < height; x++) {
+      for (y = 0; y < width; y ++){
+        img.setRGB(x, y, color);
+      }
     }
     color =  (1<<24) | (0<<16) | (0<<8) | 0; //creates the axes
     y = height /2 ;
@@ -34,7 +36,7 @@ public class Algebra {
       img.setRGB(x, y, color);
       img.setRGB(y, x, color);
     }
-    color = (10<<24) | (255<<16) | (0<<8) | 0; //draws the function by evaluating for values of x 
+    color = (10<<24) | (255<<16) | (0<<8) | 0; //draws the function by evaluating for values of x
     double tempx = 0;
     double tempy = 0;
     ArrayList<String> copy;
@@ -48,7 +50,7 @@ public class Algebra {
       }
     }
     try{ //create image file with graph
-      f = new File("Output.png");
+      f = new File("Graph.png");
       ImageIO.write(img, "png", f);
     }catch(IOException e){
       System.out.println("Error: " + e);

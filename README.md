@@ -43,5 +43,4 @@ Development Log:
  - Implemented trig and hyperbolic trig functions
  - Implemented toggling between radians and degrees
  - Implemented Graphing
- - Moved Graphing Portion to Algebra.java
  - Make Code more Flexible in Expression.java and Algebra.java

@@ -9,7 +9,7 @@ public class Algebra {
     for(int i = 0; i < input.size(); i++) {
       if (input.get(i) == "x") {
         input.add(i,x + "");
-        input.remove(i);
+        input.remove(i + 1);
 
       }
     }
@@ -19,15 +19,16 @@ public class Algebra {
     ArrayList<String> sorted = Expression.shunt(input);
     return solve(input,x);
   }
-  public static void graph(String expression) throws FileNotFoundException {
-  ArrayList<String> sorted = Expression.shunt(expression);
+  //public static void graph(String expression) throws FileNotFoundException {
+  //ArrayList<String> sorted = Expression.shunt(expression);
+  public static void graph(ArrayList<String> sorted) throws FileNotFoundException {
   System.out.println(sorted);
   int x = 0;
   int y = 0;
   int width = 2000;
   int height = 2000;
   BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-  File f;
+  File f = null;
   // sets screen white
   int color =  (120<<24) | (255<<16) | (255<<8) | 255;
   for(x = 0;x < height; x++) {
@@ -50,13 +51,13 @@ public class Algebra {
     copy = new ArrayList<String>(sorted);
     tempx = ((double)x) / 100 - 10;
     tempy = solve(copy,tempx);
-    y = (int)((tempy + 10) * 100);
-    if (y < 2000) {
+    y = (int)(100 * (10 - (tempy)));
+    if (y < 2000 && y > 0) {
       img.setRGB(x, y, color);
     }
   }
   try{
-    f = new File("user.dir");
+    f = new File("Output.png");
     ImageIO.write(img, "png", f);
   }catch(IOException e){
     System.out.println("Error: " + e);

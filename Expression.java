@@ -11,11 +11,11 @@ public class Expression{
     return isToken(input + "");
   }
   public static boolean isNumchar(char input) { //checks if a character is part of a number
-    return Character.isDigit(input) || input == '.' || input == 'E' || input == 'B';
+    return Character.isDigit(input) || input == '.';
   }
   // Shunting-yard Algorithm :D
   // It uses an output queue and an operator stack in order to determine an order of operations
-  public static ArrayList<String> shunt(String input){
+  public static ArrayList<String> shunt(String input) throws FileNotFoundException{
     ArrayList<String> queue = new ArrayList<String>(); //queue is the output
     ArrayList<Token> stack = new ArrayList<Token>(); //stack is the stack of operators/functions
     int i = 0;
@@ -50,22 +50,27 @@ public class Expression{
           holder+=input.charAt(i);
           i++;
         }
-        /*if(holder.equals("PREV")){ //previous answer
-          queue.add(Calculator.prevAns+"");
+        if(holder.equals("PREV")){ //previous answer
+          Scanner scanner = new Scanner(new File("data.txt"));
+          queue.add(scanner.next());
         }
-        else if(holder.equals("PI")){
+        else if(holder.equals("pi")){ //detecting constants
           queue.add(Math.PI+"");
         }
-        else if(holder.equals("E")){
+        else if(holder.equals("e")){
           queue.add(Math.E+"");
         }
-        else if(holder.equals("PHI")){
+        else if(holder.equals("phi")){
           queue.add(Calculator.phi+"");
         }
-        else if(holder.length()==1 && (int)holder.charAt(0)>=65 && (int)holder.charAt(0)<=90){
-          queue.add(Calculator.storedVal[(int)holder.charAt(0)-65]+"");
+        else if(holder.length()==1 && (int)holder.charAt(0)>=65 && (int)holder.charAt(0)<=90){ //stored variables
+          Scanner scanner = new Scanner(new File("data.txt"));
+          for(int counter=0;counter<(int)holder.charAt(0)-63;counter++){ //loop through file with stored variables
+            scanner.next();
+          }
+          queue.add(scanner.next());
         }
-        else*/ if(!isToken(holder)){ //if the string is not a valid function, throw an error
+        else if(!isToken(holder)){ //if the string is not a valid function, throw an error
           throw new IllegalArgumentException("Unrecognized token: "+holder);
         }
         else{ //otherwise, treat the string as a valid function
@@ -177,7 +182,7 @@ public class Expression{
     }
     return 0;
   }
-  public static double evaluate(String expression) { //calculates value of given expression
+  public static double evaluate(String expression) throws FileNotFoundException { //calculates value of given expression
     ArrayList<String> sorted = shunt(expression); //parses string using shunting-yard
     int i = 0;
     while (sorted.size() > 1) { //while there are tokens...

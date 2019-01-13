@@ -12,12 +12,12 @@ public class graphing{
     File f;
     int x;
     int y;
-    int w =  (120<<24) | (255<<16) | (255<<8) | 255;
+    int color =  (120<<24) | (255<<16) | (255<<8) | 255;
     for(x = 0;x < height; x++) {
       for (y = 0; y < width; y ++)
       img.setRGB(x, y, w);
     }
-    int color =  (1<<24) | (0<<16) | (0<<8) | 0;
+    color =  (1<<24) | (0<<16) | (0<<8) | 0;
     y = height /2 ;
     for (x = 0; x < height; x ++) {
       img.setRGB(x, y, color);

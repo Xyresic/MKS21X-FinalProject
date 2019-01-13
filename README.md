@@ -17,26 +17,15 @@ Instructions: This calculator is entirely terminal based. Compile Calculator.jav
  Supported constants: pi, e, phi
 
  Supported operators/functions:
-
-  +, -, *, /, ^, %, !
-
-  root(index,radicand)
-
-  abs(value), floor(value), ceil(value)
-
-  gcf(value,value), lcm(value,value)
-
-  ln(argument), log(base,argument)
-
-  choose(n,r), permute(n,r)
-
-  sin(value), cos(value), tan(value)
-
-  sec(value), csc(value), cot(value)
-
-  asin(value), acos(value), atan(value)
-
-  sinh(value), cosh(value), tanh(value)
+ - +, -, *, /, ^, %, !
+ - root(index,radicand)
+ - abs(value), floor(value), ceil(value)
+ - gcf(value,value), lcm(value,value)
+ - ln(argument), log(base,argument)
+ - choose(n,r), permute(n,r)
+ - sin(value), cos(value), tan(value)
+ - asin(value), acos(value), atan(value)
+ - sinh(value), cosh(value), tanh(value)
 
 Warning: Expressions using radicals, logarithms, and trigonometric functions may return values that are slightly off.
 

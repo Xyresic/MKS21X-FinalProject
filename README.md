@@ -42,3 +42,7 @@ Development Log:
  - Added support for storing previous answer, constants, and other stored variables
  - Implemented trig and hyperbolic trig functions
  - Implemented toggling between radians and degrees
+ - Implemented Graphing
+ - Haven't Implented Variable X Properly (Makeshift)
+ - Moved Graphing Portion to Algebra.java
+ - Make Code more Flexible in Expression.java and Algebra.java

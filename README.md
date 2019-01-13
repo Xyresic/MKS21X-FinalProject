@@ -5,22 +5,37 @@ APCS Project <(￣︶￣)↗[GO!] : Terminal Instruments TI-01
 Instructions: This calculator is entirely terminal based. Compile Calculator.java and run it with the following parameters:
  - For evaluating expressions: [radians/degrees] [store "capital_letter" "value/variable/constant"] "expression"
  - For graphing: graph "function(x)"
- 
+
  Graphing currently creates an .png file named Graph.png.
+
  If your expression or function requires parentheses, use quotes around it.
+
  Use PREV as the previous answer variable.
+
  Wrap negatives in parentheses.
+
  Supported constants: pi, e, phi
+
  Supported operators/functions:
+
   +, -, *, /, ^, %, !
+
   root(index,radicand)
+
   abs(value), floor(value), ceil(value)
+
   gcf(value,value), lcm(value,value)
+
   ln(argument), log(base,argument)
+
   choose(n,r), permute(n,r)
+
   sin(value), cos(value), tan(value)
+
   sec(value), csc(value), cot(value)
+
   asin(value), acos(value), atan(value)
+
   sinh(value), cosh(value), tanh(value)
 
 Warning: Expressions using radicals, logarithms, and trigonometric functions may return values that are slightly off.

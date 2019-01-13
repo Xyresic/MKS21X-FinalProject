@@ -22,6 +22,8 @@ Instructions: This calculator is entirely terminal based. Compile Calculator.jav
   asin(value), acos(value), atan(value)
   sinh(value), cosh(value), tanh(value)
 
+Warning: Expressions using radicals, logarithms, and trigonometric functions may return values that are slightly off.
+
 Development Log:
 
  1/4/2019

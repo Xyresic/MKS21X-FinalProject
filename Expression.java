@@ -241,9 +241,4 @@ public class Expression{
     ArrayList<String> sorted = shunt(expression); //parses string using shunting-yard
     return evaluate(sorted);
   }
-
-
-
-
-
 }

@@ -2,7 +2,7 @@
 
 APCS Project <(￣︶￣)↗[GO!] : Calculator
 
-Instructions: This calculator is entirely terminal based. Simply compile and run. 
+Instructions: This calculator is entirely terminal based. Simply compile and run.
 
 Development Log:
 
@@ -43,6 +43,5 @@ Development Log:
  - Implemented trig and hyperbolic trig functions
  - Implemented toggling between radians and degrees
  - Implemented Graphing
- - Haven't Implented Variable X Properly (Makeshift)
  - Moved Graphing Portion to Algebra.java
  - Make Code more Flexible in Expression.java and Algebra.java

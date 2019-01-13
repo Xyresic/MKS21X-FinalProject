@@ -137,6 +137,9 @@ public class Expression{
     if (operation.equals("%")) {
       return Math.floorMod((long)inputs[0],(long)inputs[1]);
     }
+    if (operation.equals("!")) {
+      return Token.factorial(inputs[0]);
+    }
     if (operation.equals("root")) {
       if(inputs[0]==2){
         return Math.sqrt(inputs[1]);
@@ -166,6 +169,12 @@ public class Expression{
     }
     if (operation.equals("log")) {
       return Math.log(inputs[1])/Math.log(inputs[0]);
+    }
+    if (operation.equals("choose")) {
+      return Token.choose(inputs[0],inputs[1]);
+    }
+    if (operation.equals("permute")) {
+      return Token.permute(inputs[0],inputs[1]);
     }
     return 0;
   }

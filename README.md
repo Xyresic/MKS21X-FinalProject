@@ -5,6 +5,7 @@ APCS Project <(￣︶￣)↗[GO!] : Terminal Instruments TI-01
 Instructions: This calculator is entirely terminal based. Compile Calculator.java and run it with the following parameters:
  - For evaluating expressions: [radians/degrees] [store "capital_letter" "value/variable/constant"] "expression"
  - For graphing: graph "function(x)"
+ 
  Graphing currently creates an .png file named Graph.png.
  If your expression or function requires parentheses, use quotes around it.
  Use PREV as the previous answer variable.
@@ -62,5 +63,5 @@ Development Log:
  - Added support for storing previous answer, constants, and other stored variables
  - Implemented trig and hyperbolic trig functions
  - Implemented toggling between radians and degrees
- - Implemented Graphing
- - Make Code more Flexible in Expression.java and Algebra.java
+ - Implemented graphing
+ - Make code more Flexible in Expression.java and Algebra.java

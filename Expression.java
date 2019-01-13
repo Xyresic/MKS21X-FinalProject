@@ -156,10 +156,10 @@ public class Expression{
       return Math.ceil(inputs[0]);
     }
     if (operation.equals("gcf")) {
-      return Algorithms.gcd(inputs[0],inputs[1]);
+      return Token.gcf(inputs[0],inputs[1]);
     }
     if (operation.equals("lcm")) {
-      return inputs[0]*inputs[1]/Algorithms.gcd(inputs[0],inputs[1]);
+      return inputs[0]*inputs[1]/Token.gcf(inputs[0],inputs[1]);
     }
     if (operation.equals("ln")) {
       return Math.log(inputs[0]);

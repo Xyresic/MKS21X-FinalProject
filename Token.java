@@ -79,4 +79,13 @@ public class Token{
   public static boolean isOperator(Token check){
     return check.value.length()==1;
   }
+  public static double gcf(double a, double b) {
+    if(a % 1 != 0.0 || b % 1 != 0) {
+      throw new IllegalArgumentException("Please use integers");
+    }
+    if (a % b == 0) {
+      return b;
+    }
+    return gcf(b % a, a);
+  }
 }

@@ -27,7 +27,7 @@ Instructions: This calculator is entirely terminal based. Compile Calculator.jav
  - asin(value), acos(value), atan(value)
  - sinh(value), cosh(value), tanh(value)
 
-Warning: Expressions using radicals, logarithms, and trigonometric functions may return values that are slightly off.
+Warning: Expressions using radicals, logarithms, divison, and trigonometric functions may return values that are slightly off.
 
 Development Log:
 
@@ -69,3 +69,9 @@ Development Log:
  - Implemented toggling between radians and degrees
  - Implemented graphing
  - Make code more Flexible in Expression.java and Algebra.java
+ 1/13/19
+ - Added Instructions
+ - Added Warnings
+ - Change code so syntax and comments remain consistent
+ - Clean up Graphing
+ - Condensed Files (Algebra.java and Graphing.java turned into graph.java. It was redunant to have both)

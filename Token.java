@@ -40,13 +40,13 @@ public class Token{
     add(new Token("cosh",5,0,1));
     add(new Token("tanh",5,0,1));
   }};
-  public Token(String name, int precedence, int associativity, int arguments){
+  public Token(String name, int precedence, int associativity, int arguments){ // Constuctor for all Tokens. Currently parameter is a ongoign process, many values might get chagned. Others are stable.
     value = name;
     priority = precedence;
     direction = associativity;
     parameters = arguments;
   }
-  public Token(String name){
+  public Token(String name){ // Another contrustor that converts a given string to a contructor from the list above.
     value = name;
     for(Token reference:tokens){
       if(reference.value.equals(name)){
@@ -94,8 +94,8 @@ public class Token{
   public static boolean isOperator(Token check){
     return check.value.length()==1;
   }
-  public static double gcf(double a, double b) {
-    if(a % 1 != 0.0 || b % 1 != 0) {
+  public static double gcf(double a, double b) {// Finds gcd of 2 numbers using a simple recusive loop
+    if(a % 1 != 0.0 || b % 1 != 0) { // Checks if they are "intergers", It works weridly with negative numbers
       throw new IllegalArgumentException("Please use integers for gcf");
     }
     if (a % b == 0) {
@@ -103,7 +103,7 @@ public class Token{
     }
     return gcf(b % a, a);
   }
-  public static double factorial(double a){
+  public static double factorial(double a){ // Uses a Recusive Loop to multiply factorial. Honestly, a normal loop would work just as well.
     if(a % 1 != 0.0 || a<0) {
       throw new IllegalArgumentException("Please use positive integers for factorial");
     }

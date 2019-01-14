@@ -80,6 +80,7 @@ public class Calculator{
       System.out.println(data[0].substring(0,data[0].length()-1));
     }
     if(args.length == 2 && args[0].equals("graph")){ //checks if user inputted a function
+      // -Kevin I don't think this needs to be here. I.E  Graph "2" is valid; Also, may add more than 1 equation later. It shoudl work for now.
       if(!args[1].contains("x")){
         throw new IllegalArgumentException("Please use x as the variable");
       }

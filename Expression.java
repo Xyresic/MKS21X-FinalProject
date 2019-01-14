@@ -124,7 +124,7 @@ public class Expression{
     //System.out.println(queue);
     return queue;
   }
-  public static double simplify(String operation, double...inputs) { //applies the operations/functions
+  public static double simplify(String operation, double...inputs) { //applies the operations/functions.
     if (operation.equals("+")) {
       return inputs[0]+inputs[1];
     }

@@ -1,7 +1,7 @@
 # MKS21X-FinalProject
 
 APCS Project <(￣︶￣)↗[GO!] : Terminal Instruments TI-01
-
+By: Eric Lam and Kevin Chen
 Instructions: This calculator is entirely terminal based. Compile Calculator.java and run it with the following parameters:
  - For evaluating expressions: [radians/degrees] [store "capital_letter" "value/variable/constant"] "expression"
  - For graphing: graph "function(x)"

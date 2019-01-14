@@ -125,79 +125,79 @@ public class Expression{
     return queue;
   }
   public static double simplify(String operation, double...inputs) { //applies the operations/functions.
-    if (operation.equals("+")) {
+    if (operation.equals("+")) { // simple sum of two numbers
       return inputs[0]+inputs[1];
     }
-    if (operation.equals("-")) {
+    if (operation.equals("-")) {// difference of two numbers
       return inputs[0]-inputs[1];
     }
-    if (operation.equals("*")) {
+    if (operation.equals("*")) { // product of two numebrs
       return inputs[0]*inputs[1];
     }
-    if (operation.equals("/")) {
+    if (operation.equals("/")) { // Quiotent of two numbers
       return inputs[0]/inputs[1];
     }
-    if (operation.equals("^")) {
+    if (operation.equals("^")) { // One number raised to another
       return Math.pow(inputs[0],inputs[1]);
     }
-    if (operation.equals("%")) {
+    if (operation.equals("%")) { // mod function
       return Math.floorMod((long)inputs[0],(long)inputs[1]);
     }
-    if (operation.equals("!")) {
+    if (operation.equals("!")) { // Factorial function;
       return Token.factorial(inputs[0]);
     }
     if (operation.equals("root")) {
       if(inputs[0]==2){
-        return Math.sqrt(inputs[1]);
+        return Math.sqrt(inputs[1]); // I am not completely sure why we need this
       }
       if(inputs[0]==3){
         return Math.cbrt(inputs[1]);
       }
       return Math.pow(inputs[1],1/inputs[0]);
     }
-    if (operation.equals("abs")) {
+    if (operation.equals("abs")) { // returns the distance to zero
       return Math.abs(inputs[0]);
     }
-    if (operation.equals("floor")) {
+    if (operation.equals("floor")) { // Floor returns the largest integer value that is less than or equal to it
       return Math.floor(inputs[0]);
     }
-    if (operation.equals("ceil")) {
+    if (operation.equals("ceil")) { // Ceil returns the smallest integer value that is greater than or equal to it
       return Math.ceil(inputs[0]);
     }
-    if (operation.equals("gcf")) {
+    if (operation.equals("gcf")) {// Greatest common Factor of two numebrs
       return Token.gcf(inputs[0],inputs[1]);
     }
-    if (operation.equals("lcm")) {
+    if (operation.equals("lcm")) { // Least common multiple of two numbers
       return inputs[0]*inputs[1]/Token.gcf(inputs[0],inputs[1]);
     }
-    if (operation.equals("ln")) {
+    if (operation.equals("ln")) { // natural log of a number (the base is e)
       return Math.log(inputs[0]);
     }
-    if (operation.equals("log")) {
+    if (operation.equals("log")) { // log base
       return Math.log(inputs[1])/Math.log(inputs[0]);
     }
-    if (operation.equals("choose")) {
+    if (operation.equals("choose")) { // Choose: Number of ways to choose something
       return Token.choose(inputs[0],inputs[1]);
     }
-    if (operation.equals("permute")) {
+    if (operation.equals("permute")) { // Permuatation: NUmber of ways to count something
       return Token.permute(inputs[0],inputs[1]);
     }
-    if (operation.equals("sin")) {
+    if (operation.equals("sin")) { // Trig Function sin
       return Math.sin(Calculator.isRads()? inputs[0]:inputs[0]*Math.PI/180);
     }
-    if (operation.equals("cos")) {
+    if (operation.equals("cos")) { // Trig Function cos
       return Math.cos(Calculator.isRads()? inputs[0]:inputs[0]*Math.PI/180);
     }
-    if (operation.equals("tan")) {
+    if (operation.equals("tan")) { // Trig Function tan
       return Math.tan(Calculator.isRads()? inputs[0]:inputs[0]*Math.PI/180);
     }
-    if (operation.equals("sec")) {
+    if (operation.equals("sec")) { // Trig Function sec This is equal to 1 over cos
       return 1/Math.cos(Calculator.isRads()? inputs[0]:inputs[0]*Math.PI/180);
     }
-    if (operation.equals("csc")) {
+    if (operation.equals("csc")) { // Trig Function csc This is equal to 1 over sin
       return 1/Math.sin(Calculator.isRads()? inputs[0]:inputs[0]*Math.PI/180);
     }
-    if (operation.equals("cot")) {
+    if (operation.equals("cot")) { // Trig Function cot This is equal to 1 over tan
       return 1/Math.tan(Calculator.isRads()? inputs[0]:inputs[0]*Math.PI/180);
     }
     if (operation.equals("asin")) {

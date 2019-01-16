@@ -41,7 +41,7 @@ public class Calculator{
     Scanner inputReader = new Scanner(System.in);
     String input;
     while(!(input = inputReader.nextLine()).equals("exit")){
-      args = input.split(" ");
+      args = input.split("\\s");
       scanner = new Scanner(new File("data.txt")); //intializes scanner
       for(int i  = 0; i<28; i++){ //intializes data
         data[i]=scanner.next()+"\n";
@@ -57,7 +57,7 @@ public class Calculator{
       }
       if(args.length>2 && args[0].equals("store")){ //checks for use of store
         if(args[1].length()>1){ //checks for capital letter for the vairable that is storing
-          throw new IllegalArgumentException("Please use a capital letter");
+          throw new IllegalArgumentException("Please use a capital letter for the variable");
         } else if(isNumeric(args[2])){ //checks for correct number format
           store(args[1].charAt(0),Double.parseDouble(args[2]));
         } else if(args[2].equals("PREV")){ //checks for storing previous answer
@@ -69,7 +69,7 @@ public class Calculator{
         } else if(args[2].equals("phi")){
           store(args[1].charAt(0),phi);
         } else if(args[2].length()>1){ //checks for use of a capital letter for the reference variable
-          throw new IllegalArgumentException("Please use a capital letter");
+          throw new IllegalArgumentException("Please use a capital letter for the reference variable");
         } else {
           store(args[1].charAt(0),args[2].charAt(0));
         }
@@ -82,16 +82,16 @@ public class Calculator{
       if(args.length == 1 && !args[0].contains("=")){ //checks if user inputted an expression
         data[0]=Expression.evaluate(args[0])+"\n";
         rewrite();
-        System.out.println(data[0].substring(0,data[0].length()-1));
+        System.out.println("Ans: "+data[0].substring(0,data[0].length()-1));
       }
       if(args.length == 2 && args[0].equals("graph")){ //checks if user inputted a function
-        // -Kevin I don't think this needs to be here. I.E  Graph "2" is valid; Also, may add more than 1 equation later. It shoudl work for now.
         if(!args[1].contains("x")){
           throw new IllegalArgumentException("Please use x as the variable");
         }
         Graph.graph(args[1]);
         System.out.println("Graph.png updated");
       }
+      System.out.println("--------------------------------------------------------------------");
     }
   }
 }

@@ -76,9 +76,10 @@ Development Log:
 
  1/13/19
  - Added Instructions
- - Added Warnings
- - Change code so syntax and comments remain consistent
- - Clean up Graphing
+ - Cleaned up graphing
  - Added x and graphing to calculator portion
- - Condensed Files (Algebra.java and Graphing.java turned into graph.java. It was redundant to have both)
- - Graph " Function " will put draw a file now. :D
+ - Condensed Files
+ - Graph "function" will graph using an image now. :D
+
+ 1/16/19
+  - Implemented continuous user input, more akin to an actual calculator

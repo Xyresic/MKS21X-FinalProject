@@ -84,12 +84,15 @@ public class Calculator{
         rewrite();
         System.out.println("Ans: "+data[0].substring(0,data[0].length()-1));
       }
-      if(args.length == 2 && args[0].equals("graph")){ //checks if user inputted a function
+      if(args.length >= 2 && args[0].equals("graph")){ //checks if user inputted a function
         if(!args[1].contains("x")){
           throw new IllegalArgumentException("Please use x as the variable");
         }
         Graph.graph(args[1]);
         System.out.println("Graph.png updated");
+        if (args.length == 3) {
+          Graph.graph(args[2]);
+        }
       }
       System.out.println("--------------------------------------------------------------------");
     }

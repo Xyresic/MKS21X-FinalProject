@@ -13,11 +13,23 @@ public class Graph {
     return Expression.evaluate(input);
   }
   public static double solve(String input, double x) throws FileNotFoundException{ //string version
-    ArrayList<String> sorted = Expression.shunt(input,"graph");
+    char variable = 'x';
+    for(int i = 0; i<input.length(); i++){
+      if(Character.isLetter(input.charAt(i))){
+        variable = input.charAt(i);
+      }
+    }
+    ArrayList<String> sorted = Expression.shunt(input,variable);
     return solve(input,x);
   }
   public static void graph(String expression) throws FileNotFoundException {
-    ArrayList<String> sorted = Expression.shunt(expression,"graph");
+    char variable = 'x';
+    for(int i = 0; i<expression.length(); i++){
+      if(Character.isLetter(expression.charAt(i))){
+        variable = expression.charAt(i);
+      }
+    }
+    ArrayList<String> sorted = Expression.shunt(expression,variable);
     double x = 0; // x pixel value
     int y = 0; // y pixel value
     int width = 2000; // 20.00 width value

@@ -15,7 +15,7 @@ public class Expression{
   }
   // Shunting-yard Algorithm :D
   // It uses an output queue and an operator stack in order to determine an order of operations
-  public static ArrayList<String> shunt(String input, String type) throws FileNotFoundException{
+  public static ArrayList<String> shunt(String input, char variable) throws FileNotFoundException{
     ArrayList<String> queue = new ArrayList<String>(); //queue is the output
     ArrayList<Token> stack = new ArrayList<Token>(); //stack is the stack of operators/functions
     int i = 0;
@@ -60,8 +60,8 @@ public class Expression{
           queue.add(Math.E+"");
         } else if(holder.equals("phi")){
           queue.add(Calculator.phi+"");
-        } else if(type.equals("graph") && holder.equals("x")){ //detecting vairable x for graphing
-          queue.add("x");
+        } else if(!(variable == '-')){ //detecting vairable for graphing
+          queue.add(variable+"");
         } else if(holder.length()==1 && (int)holder.charAt(0)>=65 && (int)holder.charAt(0)<=90){ //stored variables
           Scanner scanner = new Scanner(new File("data.txt"));
           for(int counter=0;counter<(int)holder.charAt(0)-63;counter++){ //loop through file with stored variables
@@ -241,7 +241,7 @@ public class Expression{
     return Double.parseDouble(sorted.remove(0));
   }
   public static double evaluate(String expression) throws FileNotFoundException { //calculates value of given expression
-    ArrayList<String> sorted = shunt(expression,"expression"); //parses string using shunting-yard
+    ArrayList<String> sorted = shunt(expression,'-'); //parses string using shunting-yard
     return evaluate(sorted);
   }
 }

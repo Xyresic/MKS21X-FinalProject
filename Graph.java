@@ -41,6 +41,8 @@ public class Graph {
     double tempx = 0; // Saves a temporary x value to be used for math purposes
     double tempy = 0; // Saves a temporary x value to be used for math purposes
     ArrayList<String> copy; // makes a copy because our current code deletes the values in the ArrayList. This is because the x value keeps on getting replaced
+    int oldvalue = 0;;
+    int dif = 0;
     for(x = 0;x < height; x++) { // the entire image starts black. Therefore, code is need to convert the entire screen to white for standard purposes
       for (y = 0; y < width; y ++){ // Standard Loop to get though all the values
         img.setRGB((int)x, y, color);
@@ -55,18 +57,24 @@ public class Graph {
     color = (10<<24) | (255<<16) | (0<<8) | 0; //draws the function by evaluating for values of x. Color is red based on RGB. Might add new colors to the spectrum later
 
     for(x = 0; x < width;x += .01) {
+      dif = 0;
       copy = new ArrayList<String>(sorted); // every time it needs to reset the value
       tempx = (x) / 100 - 10; // convert standard double x to pixel value
       tempy = solve(copy,tempx); // returns standard double y by using x value and substituting it into the function
       y = (int)(100 * (10 - (tempy))); // converts standard double y to pixel value
       if (y < 2000 && y > 0) { // if the y is within the range of the graph
-        img.setRGB((int)x, y, color); // sets the value to color red
+        while(x > 0 && oldvalue + dif != y) {
+          if (y > oldvalue) {dif += 1;}
+          else {dif -= 1;}
+        img.setRGB((int)x, y - dif, color); // sets the value to color red
+      }
         if (y == 1000 && only <= 0) {
           System.out.println("The root is " + tempx);
           only = 1;
         }
         only -= .01;
       }
+      oldvalue = y;
     }
     try{ //create image file with graph
       f = new File("Graph.png"); // names file Graph.png
@@ -98,6 +106,8 @@ public class Graph {
     ArrayList<String> copy; // makes a copy because our current code deletes the values in the ArrayList. This is because the x value keeps on getting replaced
     ArrayList<String> roots = new ArrayList<String>();
     ArrayList<String> troots;
+    int oldvalue = 0;
+    int dif = 0;
     for(x = 0;x < height; x++) { // the entire image starts black. Therefore, code is need to convert the entire screen to white for standard purposes
       for (y = 0; y < width; y ++){ // Standard Loop to get though all the values
         img.setRGB((int)x, y, color);
@@ -111,21 +121,31 @@ public class Graph {
     }
     color = (10<<24) | (255<<16) | (0<<8) | 0; //draws the function by evaluating for values of x. Color is red based on RGB. Might add new colors to the spectrum later
     for (int i =0; i < expressionList.size(); i++) {
+       oldvalue = 0;
+       dif = 0;
        troots = new ArrayList<String>();
        sorted = Expression.shunt(expressionList.get(i),variable);
        for(x = 0; x < width;x += .01) {
+         dif = 0;
          copy = new ArrayList<String>(sorted); // every time it needs to reset the value
          tempx = (x) / 100 - 10; // convert standard double x to pixel value
          tempy = solve(copy,tempx); // returns standard double y by using x value and substituting it into the function
          y = (int)(100 * (10 - (tempy))); // converts standard double y to pixel value
          if (y < 2000 && y > 0) { // if the y is within the range of the graph
-           img.setRGB((int)x, y, color); // sets the value to color red
+           while(x > 0 && oldvalue + dif != y) {
+             if (y > oldvalue) {dif += 1;}
+             else {dif -= 1;}
+             if (y - dif < 2000 && y - dif > 0) {
+           img.setRGB((int)x, y - dif, color); // sets the value to color red
+         }
+       }
            if (y == 1000 && only <= 0) {
-             troots.add("" +tempx);
+             troots.add(tempx + "");
              only = 1;
            }
            only -= .01;
          }
+         oldvalue = y;
        }
        roots.add("The roots of " + expressionList.get(i) + " are: " + troots);
      }

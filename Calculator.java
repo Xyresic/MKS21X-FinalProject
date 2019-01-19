@@ -85,14 +85,15 @@ public class Calculator{
         System.out.println("Ans: "+data[0].substring(0,data[0].length()-1));
       }
       if(args.length >= 2 && args[0].equals("graph")){ //checks if user inputted a function
+        ArrayList<String> temporaryArray = new ArrayList<String>();
         if(!args[1].contains("x")){
           throw new IllegalArgumentException("Please use x as the variable");
         }
-        Graph.graph(args[1]);
-        System.out.println("Graph.png updated");
-        if (args.length == 3) {
-          Graph.graph(args[2]);
+        for(int i = 1; i < args.length; i++) {
+          temporaryArray.add(args[i]);
         }
+        System.out.println(temporaryArray);
+        Graph.graph(temporaryArray);
       }
       System.out.println("--------------------------------------------------------------------");
     }

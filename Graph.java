@@ -3,6 +3,38 @@ import java.io.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 public class Graph {
+  public static int colorwheel(int x) {
+    if (x % 7 ==0) { //red
+      return  (10<<24) | (255<<16) | (0<<8) | 0;
+    }
+    if (x % 7 ==1) { //orange
+      return  (10<<24) | (255<<16) | (99<<8) | 0;
+    }
+    if (x % 7 ==2) { //yellow
+      return  (18<<24) | (255<<16) | (215<<8) | 20;
+    }
+    if (x % 7 ==3) {
+      return  (10<<24) | (0<<16) | (255<<8) | 0;
+    }
+    if (x % 7 ==4) {
+      return  (10<<24) | (0<<16) | (0<<8) | 255;
+    }
+    if (x % 7 ==5) {
+      return  (10<<24) | (153<<16) | (153<<8) | 255;
+    }
+      return  (10<<24) | (153<<16) | (0<<8) | 153;
+  }
+
+
+
+
+
+
+
+
+
+
+
   public static double solve(ArrayList<String> input, double substitute) throws FileNotFoundException { //solves for y for given x-value
     for(int i = 0; i < input.size(); i++) {
       if (input.get(i).equals("x")) {
@@ -119,8 +151,9 @@ public class Graph {
       img.setRGB((int)x, y, color); // for all x values draw a line at the middle of the image
       img.setRGB(y, (int)x, color); // Rotated it 90 degrees. This is just a more convinet way to draw it
     }
-    color = (10<<24) | (255<<16) | (0<<8) | 0; //draws the function by evaluating for values of x. Color is red based on RGB. Might add new colors to the spectrum later
+
     for (int i =0; i < expressionList.size(); i++) {
+       color = colorwheel(i);
        oldvalue = 0;
        dif = 0;
        troots = new ArrayList<String>();

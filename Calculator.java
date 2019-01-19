@@ -5,17 +5,17 @@ public class Calculator{
   private static Scanner scanner; //scanner for data file containing previous answer and stored variables
   private static String[] data = new String[28]; //array to store values in data.txt
   public static void store(char name, double value) throws FileNotFoundException { //stores a value attatched to a capital letter
-    if((int)name<65 || (int)name>90){ //if name is not a capital letter, throw an error
+    if(name<'A' || name>'Z'){ //if name is not a capital letter, throw an error
       throw new IllegalArgumentException("Please use a capital letter");
     }
-    data[(int)name-63] = value+"\n"; //change value attatched to said letter
+    data[name-63] = value+"\n"; //change value attatched to said letter
     rewrite();
   }
   public static void store(char name, char variable) throws FileNotFoundException { //stores a value from another variable
-    if((int)name<65 || (int)name>90 ||(int)variable<65 || (int)variable>90){
+    if(name<'A' || name>'Z' || variable<'A' || variable>'Z'){
       throw new IllegalArgumentException("Please use a capital letter");
     }
-    data[(int)name-63] = data[(int)variable-63];
+    data[name-63] = data[variable-63];
     rewrite();
   }
   private static void rewrite() throws FileNotFoundException { //writes to data.txt to match changes made
@@ -86,14 +86,11 @@ public class Calculator{
       }
       if(args.length >= 2 && args[0].equals("graph")){ //checks if user inputted a function
         ArrayList<String> temporaryArray = new ArrayList<String>();
-        if(!args[1].contains("x")){
-          throw new IllegalArgumentException("Please use x as the variable");
-        }
         for(int i = 1; i < args.length; i++) {
           temporaryArray.add(args[i]);
         }
-        System.out.println(temporaryArray);
         Graph.graph(temporaryArray);
+        System.out.println("Graph.png updated.");
       }
       System.out.println("--------------------------------------------------------------------");
     }

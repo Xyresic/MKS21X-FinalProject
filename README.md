@@ -89,4 +89,5 @@ Development Log:
   - That includes: multifunctions and connected graphs
   - Fixed Roots issue when there are multiple graphs
   - Fixed Code in Calculator.java Preventing multiple graphs
+  - Shunt works for all variables 
   - Bugs: Can't find a way to deal with round errors. Root round error maybe unfixable.

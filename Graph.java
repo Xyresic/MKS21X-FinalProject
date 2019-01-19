@@ -96,6 +96,8 @@ public class Graph {
     double tempx = 0; // Saves a temporary x value to be used for math purposes
     double tempy = 0; // Saves a temporary x value to be used for math purposes
     ArrayList<String> copy; // makes a copy because our current code deletes the values in the ArrayList. This is because the x value keeps on getting replaced
+    ArrayList<String> roots = new ArrayList<String>();
+    ArrayList<String> troots;
     for(x = 0;x < height; x++) { // the entire image starts black. Therefore, code is need to convert the entire screen to white for standard purposes
       for (y = 0; y < width; y ++){ // Standard Loop to get though all the values
         img.setRGB((int)x, y, color);
@@ -109,6 +111,7 @@ public class Graph {
     }
     color = (10<<24) | (255<<16) | (0<<8) | 0; //draws the function by evaluating for values of x. Color is red based on RGB. Might add new colors to the spectrum later
     for (int i =0; i < expressionList.size(); i++) {
+       troots = new ArrayList<String>();
        sorted = Expression.shunt(expressionList.get(i),variable);
        for(x = 0; x < width;x += .01) {
          copy = new ArrayList<String>(sorted); // every time it needs to reset the value
@@ -118,12 +121,13 @@ public class Graph {
          if (y < 2000 && y > 0) { // if the y is within the range of the graph
            img.setRGB((int)x, y, color); // sets the value to color red
            if (y == 1000 && only <= 0) {
-             System.out.println("The root is " + tempx);
+             troots.add("" +tempx);
              only = 1;
            }
            only -= .01;
          }
        }
+       roots.add("The roots of " + expressionList.get(i) + " are: " + troots);
      }
        try{ //create image file with graph
          f = new File("Graph.png"); // names file Graph.png
@@ -131,8 +135,9 @@ public class Graph {
        }catch(IOException e){
          System.out.println("Error: " + e);
        }
-
-
+       for (int i =0; i < roots.size(); i++) {
+       System.out.println(roots.get(i));
+     }
 
     }
 

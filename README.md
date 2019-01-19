@@ -83,3 +83,10 @@ Development Log:
 
  1/16/19
   - Implemented continuous user input, more akin to an actual calculator
+  
+  1/18/19
+  - Implemented a lot of quality of life graphical changes.
+  - That includes: multifunctions and connected graphs
+  - Fixed Roots issue when there are multiple graphs
+  - Fixed Code in Calculator.java Preventing multiple graphs
+  - Bugs: Can't find a way to deal with round errors. Root round error maybe unfixable.

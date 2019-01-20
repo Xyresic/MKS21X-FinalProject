@@ -123,7 +123,7 @@ public class Graph {
       int oldvalue = 0;
       int dif = 0;
       if(variables.size()==1 || split.contains("y")){
-        for(x = 0; x < width;x += .01) {
+        for(x = 0; x < width;x += 1) {
           dif = 0;
           copy = Expression.shunt(converted.replaceAll("y=","").replaceAll("=y",""),varList); // every time it needs to reset the value
           tempx = (x) / 100 - 10; // convert standard double x to pixel value
@@ -134,6 +134,7 @@ public class Graph {
               if (y > oldvalue) {dif += 1;}
               else {dif -= 1;}
               if (y - dif < 2000 && y - dif > 0) {
+                System.out.println(y+","+oldvalue+","+dif);
                 img.setRGB((int)x, y - dif, color); // sets the value to color red
               }
             }

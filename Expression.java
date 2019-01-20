@@ -182,31 +182,67 @@ public class Expression{
       return Token.permute(inputs[0],inputs[1]);
     }
     if (operation.equals("sin")) { // Trig Function sin
+      if((inputs[0]/Math.PI)%1==0){
+        return 0.0;
+      }
       return Math.sin(Calculator.isRads()? inputs[0]:inputs[0]*Math.PI/180);
     }
     if (operation.equals("cos")) { // Trig Function cos
+      if((inputs[0]/(Math.PI/2))%2==1 || (inputs[0]/(Math.PI/2))%2==-1){
+        return 0.0;
+      }
       return Math.cos(Calculator.isRads()? inputs[0]:inputs[0]*Math.PI/180);
     }
     if (operation.equals("tan")) { // Trig Function tan
+      if((inputs[0]/(Math.PI/4))%4==1||(inputs[0]/(Math.PI/4))%4==-3){
+        return 1.0;
+      }
+      if((inputs[0]/(Math.PI/4))%4==-1||(inputs[0]/(Math.PI/4))%4==3){
+        return -1.0;
+      }
+      if((inputs[0]/Math.PI)%1==0){
+        return 0.0;
+      }
+      if((inputs[0]/(Math.PI/2))%2==1 ||(inputs[0]/(Math.PI/2))%2==-1){
+        return Double.NaN;
+      }
       return Math.tan(Calculator.isRads()? inputs[0]:inputs[0]*Math.PI/180);
     }
     if (operation.equals("sec")) { // Trig Function sec This is equal to 1 over cos
+      if((inputs[0]/(Math.PI/2))%2==1 || (inputs[0]/(Math.PI/2))%2==-1){
+        return Double.NaN;
+      }
       return 1/Math.cos(Calculator.isRads()? inputs[0]:inputs[0]*Math.PI/180);
     }
     if (operation.equals("csc")) { // Trig Function csc This is equal to 1 over sin
+      if((inputs[0]/Math.PI)%1==0){
+        return Double.NaN;
+      }
       return 1/Math.sin(Calculator.isRads()? inputs[0]:inputs[0]*Math.PI/180);
     }
     if (operation.equals("cot")) { // Trig Function cot This is equal to 1 over tan
+      if((inputs[0]/(Math.PI/4))%4==1||(inputs[0]/(Math.PI/4))%4==-3){
+        return 1.0;
+      }
+      if((inputs[0]/(Math.PI/4))%4==-1||(inputs[0]/(Math.PI/4))%4==3){
+        return -1.0;
+      }
+      if((inputs[0]/Math.PI)%1==0){
+        return Double.NaN;
+      }
+      if((inputs[0]/(Math.PI/2))%2==1 ||(inputs[0]/(Math.PI/2))%2==-1){
+        return 0.0;
+      }
       return 1/Math.tan(Calculator.isRads()? inputs[0]:inputs[0]*Math.PI/180);
     }
     if (operation.equals("asin")) {
       return Calculator.isRads()? Math.asin(inputs[0]):Math.asin(inputs[0])*180/Math.PI;
     }
     if (operation.equals("acos")) {
-      return Calculator.isRads()? Math.asin(inputs[0]):Math.asin(inputs[0])*180/Math.PI;
+      return Calculator.isRads()? Math.acos(inputs[0]):Math.acos(inputs[0])*180/Math.PI;
     }
     if (operation.equals("atan")) {
-      return Calculator.isRads()? Math.asin(inputs[0]):Math.asin(inputs[0])*180/Math.PI;
+      return Calculator.isRads()? Math.atan(inputs[0]):Math.atan(inputs[0])*180/Math.PI;
     }
     if (operation.equals("sinh")) {
       return Math.sinh(inputs[0]);

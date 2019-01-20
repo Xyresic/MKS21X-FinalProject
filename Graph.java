@@ -2,6 +2,7 @@ import java.util.*;
 import java.io.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import java.text.*;
 public class Graph {
   private static ArrayList<String> varList = new ArrayList<String>() {{
     add("x");
@@ -127,12 +128,14 @@ public class Graph {
         for(x = 0; x < width;x += 1) {
           dif = 0;
           copy = Expression.shunt(converted.replaceAll("y=","").replaceAll("=y",""),varList); // every time it needs to reset the value
-          tempx = (x) / 100 - 10; // convert standard double x to pixel value
+          tempx = x/100-10; // convert standard double x to pixel value
+          DecimalFormat rounder = new DecimalFormat("#.##");
+          tempx = Double.parseDouble(rounder.format(tempx));
           tempy = solve(copy,new double[]{tempx}); // returns standard double y by using x value and substituting it into the function
           if(Double.isNaN(tempy)){ // converts standard double y to pixel value
             y = Double.NaN;
           } else {
-            y = 100 * (10 - (tempy));
+            y = Math.round(100 * (10 - (tempy)));
           }
           if(y>2000 && oldvalue<2000 && oldvalue>0 || y<0 && oldvalue>0 && oldvalue<2000){
             asymptote = true;
@@ -144,13 +147,11 @@ public class Graph {
             if(y < 2000 && y > 0){
               img.setRGB((int)x, (int)y, color);
             }
-            y=(double)(int)y;
+            y = (double)(int)y;
             while(x > 0 && oldvalue + dif != y) {
               if (y > oldvalue) {dif += 1;}
               else {dif -= 1;}
-              //System.out.println(tempx+","+tempy+","+y+","+oldvalue+","+dif);
               if (y - dif < 2000 && y - dif > 0) {
-                //System.out.println(y+","+oldvalue+","+dif);
                 img.setRGB((int)x, (int)y - dif, color); // sets the value to color red
               }
             }

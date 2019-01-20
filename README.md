@@ -83,11 +83,15 @@ Development Log:
 
  1/16/19
   - Implemented continuous user input, more akin to an actual calculator
-  
+
   1/18/19
-  - Implemented a lot of quality of life graphical changes.
-  - That includes: multifunctions and connected graphs
-  - Fixed Roots issue when there are multiple graphs
-  - Fixed Code in Calculator.java Preventing multiple graphs
-  - Shunt works for all variables 
-  - Bugs: Can't find a way to deal with round errors. Root round error maybe unfixable.
+  - Implemented graphing multiple functions simultaneously
+  - Improved root detector
+  - Changed shunt to detect variables if required
+  - Bugs: Floating point arithmetic rounding errors
+
+  1/19/19
+  - Implemented different colors for multiple functions
+  - Implemented graphing relations
+  - Improved trigonometric functions
+  - Fixed graphs with discontinuities

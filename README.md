@@ -55,7 +55,7 @@ Development Log:
  - Fixed some bugs with parentheses
  - Added more comments
  - Made code more readable
- - Bugs: Read above. No new bugs founds
+ - Bugs: No new bugs found.
 
  1/10/19
  - Added functions to simplify
@@ -75,7 +75,7 @@ Development Log:
  - Implemented toggling between radians and degrees
  - Implemented graphing
  - Make code more Flexible in Expression.java and Algebra.java
- - No new bugs. It was just a lot of variables and comments
+ - Bugs: No new bugs found.
 
  1/13/19
  - Added Instructions
@@ -83,7 +83,7 @@ Development Log:
  - Added x and graphing to calculator portion
  - Condensed Files
  - Graph "function" will graph using an image now. :D
- - Bugs: High Power/ slope will cause dotted lines to appear
+ - Bugs: High Power/ slope will cause dotted lines to appear.
 
  1/16/19
   - Implemented continuous user input, more akin to an actual calculator

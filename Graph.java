@@ -134,11 +134,14 @@ public class Graph {
             y = 100 * (10 - (tempy));
           }
           if (y < 2000 && y > 0) { // if the y is within the range of the graph
+            img.setRGB((int)x, (int)y - dif, color);
             y=(double)(int)y;
             while(x > 0 && oldvalue + dif != y) {
               if (y > oldvalue) {dif += 1;}
               else {dif -= 1;}
+              //System.out.println(tempx+","+tempy+","+y+","+oldvalue+","+dif);
               if (y - dif < 2000 && y - dif > 0) {
+                //System.out.println(y+","+oldvalue+","+dif);
                 img.setRGB((int)x, (int)y - dif, color); // sets the value to color red
               }
             }

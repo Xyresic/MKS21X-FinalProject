@@ -47,7 +47,7 @@ public class Graph {
   }
   public static void graph(ArrayList<String> equations) throws FileNotFoundException {
     double x = 0; // x pixel value
-    int y = 0; // y pixel value
+    double y = 0; // y pixel value
     int width = 2000; // 20.00 width value
     int height = 2000; // 20.00 height value Overall it is a 10 by 10 graph
     int color =  (120<<24) | (255<<16) | (255<<8) | 255; //sets image background to white, (255, 255, 255) is white in RGB
@@ -55,14 +55,14 @@ public class Graph {
     File f; // file that the graph is being written to
     for(x = 0;x < height; x++) { // the entire image starts black. Therefore, code is need to convert the entire screen to white for standard purposes
       for (y = 0; y < width; y ++){ // Standard Loop to get though all the values
-        img.setRGB((int)x, y, color);
+        img.setRGB((int)x, (int)y, color);
       }
     }
     color =  (1<<24) | (0<<16) | (0<<8) | 0; //creates the axes
     y = height /2 ; // half way in the chart
     for (x = 0; x < height; x++) {
-      img.setRGB((int)x, y, color); // for all x values draw a line at the middle of the image
-      img.setRGB(y, (int)x, color); // Rotated it 90 degrees. This is just a more convinet way to draw it
+      img.setRGB((int)x, (int)y, color); // for all x values draw a line at the middle of the image
+      img.setRGB((int)y, (int)x, color); // Rotated it 90 degrees. This is just a more convinet way to draw it
     }
     int equationCount = 0;
     for(String expression : equations){
@@ -128,14 +128,18 @@ public class Graph {
           copy = Expression.shunt(converted.replaceAll("y=","").replaceAll("=y",""),varList); // every time it needs to reset the value
           tempx = (x) / 100 - 10; // convert standard double x to pixel value
           tempy = solve(copy,new double[]{tempx}); // returns standard double y by using x value and substituting it into the function
-          y = (int)(100 * (10 - (tempy))); // converts standard double y to pixel value
+          if(Double.isNaN(tempy)){ // converts standard double y to pixel value
+            y = Double.NaN;
+          } else {
+            y = 100 * (10 - (tempy));
+          }
           if (y < 2000 && y > 0) { // if the y is within the range of the graph
+            y=(double)(int)y;
             while(x > 0 && oldvalue + dif != y) {
               if (y > oldvalue) {dif += 1;}
               else {dif -= 1;}
               if (y - dif < 2000 && y - dif > 0) {
-                System.out.println(y+","+oldvalue+","+dif);
-                img.setRGB((int)x, y - dif, color); // sets the value to color red
+                img.setRGB((int)x, (int)y - dif, color); // sets the value to color red
               }
             }
             if (y == 1000 && only <= 0) {
@@ -144,7 +148,12 @@ public class Graph {
             }
             only -= .01;
           }
-          oldvalue = y;
+          if(Double.isNaN(y)){
+            copy = Expression.shunt(converted.replaceAll("y=","").replaceAll("=y",""),varList);
+            oldvalue = (int)(100 * (10 - (solve(copy,new double[]{(x+1) / 100 - 10}))));
+          } else{
+            oldvalue = (int)y;
+          }
         }
       }
       else{

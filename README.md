@@ -55,11 +55,13 @@ Development Log:
  - Fixed some bugs with parentheses
  - Added more comments
  - Made code more readable
+ - Bugs: Read above. No new bugs founds
 
  1/10/19
  - Added functions to simplify
  - Added functions as tokens
  - Implemented function evaluating
+ - Bugs: Tokens don't work properly. It doesn't work with PEMDAS well.
 
  1/12/19
  - Added errors for incorrect comma usage
@@ -73,6 +75,7 @@ Development Log:
  - Implemented toggling between radians and degrees
  - Implemented graphing
  - Make code more Flexible in Expression.java and Algebra.java
+ - No new bugs. It was just a lot of variables and comments
 
  1/13/19
  - Added Instructions
@@ -80,6 +83,7 @@ Development Log:
  - Added x and graphing to calculator portion
  - Condensed Files
  - Graph "function" will graph using an image now. :D
+ - Bugs: High Power/ slope will cause dotted lines to appear
 
  1/16/19
   - Implemented continuous user input, more akin to an actual calculator
@@ -91,3 +95,11 @@ Development Log:
   - Fixed Code in Calculator.java Preventing multiple graphs
   - Shunt works for all variables 
   - Bugs: Can't find a way to deal with round errors. Root round error maybe unfixable.
+
+1/19/19
+ - Added Color to Graphs
+ - Added Relations
+ - Fixed Round-Off error for some trig functions
+ - Fixed parentheses for some functions
+ - Made Graphing more efficient
+ - Bugs: Spacing Error. Huge can't find a way to allow people to type space in functions. 

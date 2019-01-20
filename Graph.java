@@ -123,6 +123,7 @@ public class Graph {
       int oldvalue = 0;
       int dif = 0;
       if(variables.size()==1 || split.contains("y")){
+        boolean asymptote = false;
         for(x = 0; x < width;x += 1) {
           dif = 0;
           copy = Expression.shunt(converted.replaceAll("y=","").replaceAll("=y",""),varList); // every time it needs to reset the value
@@ -133,8 +134,16 @@ public class Graph {
           } else {
             y = 100 * (10 - (tempy));
           }
-          if (y < 2000 && y > 0) { // if the y is within the range of the graph
-            img.setRGB((int)x, (int)y - dif, color);
+          if(y>2000 && oldvalue<2000 && oldvalue>0 || y<0 && oldvalue>0 && oldvalue<2000){
+            asymptote = true;
+          }
+          if(oldvalue>2000 || oldvalue<0){
+            asymptote = false;
+          }
+          if (asymptote || y < 2000 && y > 0) { // if the y is within the range of the graph
+            if(y < 2000 && y > 0){
+              img.setRGB((int)x, (int)y, color);
+            }
             y=(double)(int)y;
             while(x > 0 && oldvalue + dif != y) {
               if (y > oldvalue) {dif += 1;}

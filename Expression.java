@@ -36,7 +36,7 @@ public class Expression{
           i++;
         }
         queue.add(holder); //...add the number to the queue
-      } else if (isToken(input.charAt(i))) { //if the current char is a Token
+      } else if (isToken(input.charAt(i)) && input.charAt(i)!='(') { //if the current char is a Token
         Token temp = new Token(input.charAt(i)+"");
         while (stack.size() > 0 && temp.isSlower(stack.get(0)) && !stack.get(0).equals(new Token("("))) { //if this token has lower pcredence...
           queue.add("" + stack.remove(0)); //...add tokens of higher precedence to the queue
@@ -45,7 +45,7 @@ public class Expression{
         i++;
       } else if (Character.isLetter(input.charAt(i))) { //if the current char is a letter...
         if(i>0 && Character.isDigit(input.charAt(i-1))){
-          stack.add(new Token("*"));
+          stack.add(0,new Token("*"));
         }
         while(i<input.length() && Character.isLetter(input.charAt(i))){ //...add subsequent letters to a temporary holder
           holder+=input.charAt(i);
@@ -88,6 +88,9 @@ public class Expression{
         }
         i++;
       } else if(input.charAt(i)=='('){ //if open parenthesis, add it to stack
+        if(i>0 && Character.isDigit(input.charAt(i-1))){
+          stack.add(0,new Token("*"));
+        }
         stack.add(0,new Token("("));
         i++;
       } else if(input.charAt(i)==')'){ //if close parenthesis, pop tokens until open parenthesis is found

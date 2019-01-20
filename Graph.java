@@ -147,12 +147,14 @@ public class Graph {
             if(y < 2000 && y > 0){
               img.setRGB((int)x, (int)y, color);
             }
-            y = (double)(int)y;
-            while(x > 0 && oldvalue + dif != y) {
-              if (y > oldvalue) {dif += 1;}
-              else {dif -= 1;}
-              if (y - dif < 2000 && y - dif > 0) {
-                img.setRGB((int)x, (int)y - dif, color); // sets the value to color red
+            if(!expression.contains("floor") && !expression.contains("ceil")){
+              y = (double)(int)y;
+              while(x > 0 && oldvalue + dif != y) {
+                if (y > oldvalue) {dif += 1;}
+                else {dif -= 1;}
+                if (y - dif < 2000 && y - dif > 0) {
+                  img.setRGB((int)x, (int)y - dif, color); // sets the value to color red
+                }
               }
             }
             if (y == 1000 && only <= 0) {

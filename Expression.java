@@ -48,9 +48,6 @@ public class Expression{
         if(i>0 && (Character.isDigit(input.charAt(i-1)) || variables.contains(input.charAt(i-1)+""))){ //checks for coefficients and multiplied variables
           stack.add(0,new Token("*")); //add a multiply token
         }
-        if(i>0 && input.charAt(i-1)=='-'){ //checks for negation
-          queue.add("0"); //add a zero to negate
-        }
         do { //...add subsequent letters to a temporary holder
           holder+=input.charAt(i);
           i++;
@@ -99,8 +96,13 @@ public class Expression{
         i++;
       } else if(input.charAt(i)==')'){ //if close parenthesis, pop tokens until open parenthesis is found
         if(stack.size()>1 && stack.get(0).equals(new Token("-")) && stack.get(1).equals(new Token("("))){ //if there is a negative number, add it to the queue
-          queue.set(queue.size()-1,"-"+queue.get(queue.size()-1));
-          stack.remove(0); //remove negative sign
+          if(i>0 && Character.isLetter(input.charAt(i))){
+            queue.add(queue.size()-1,0+"");
+          }
+          else{
+            queue.set(queue.size()-1,"-"+queue.get(queue.size()-1));
+            stack.remove(0); //remove negative sign
+          }
         }
         else {
           if(curFunction.toString().length()>0 && commaCount!=curFunction.getArgs()-1){ //if there is an incorrect number of commas, throw an error

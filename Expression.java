@@ -47,6 +47,9 @@ public class Expression{
         if(i>0 && (Character.isDigit(input.charAt(i-1)) || variables.contains(input.charAt(i-1)+""))){
           stack.add(0,new Token("*"));
         }
+        if(i>0 && input.charAt(i-1)=='-'){
+          queue.add("0");
+        }
         do { //...add subsequent letters to a temporary holder
           holder+=input.charAt(i);
           i++;

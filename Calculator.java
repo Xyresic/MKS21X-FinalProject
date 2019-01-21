@@ -1,5 +1,10 @@
 import java.util.*;
 import java.io.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 public class Calculator{
   public static double phi = 1.618033988749895;
   private static Scanner scanner; //scanner for data file containing previous answer and stored variables
@@ -36,7 +41,7 @@ public class Calculator{
   public static boolean isRads(){
     return data[1].equals("radians\n");
   }
-  public static void main(String[] args) throws FileNotFoundException {
+  public static void main(String[] args) throws FileNotFoundException, IOException{
     System.out.println("Welcome to Terminal Instruments model 1.");
     Scanner inputReader = new Scanner(System.in);
     String input;
@@ -91,6 +96,19 @@ public class Calculator{
         }
         Graph.graph(temporaryArray);
         System.out.println("Graph.png updated.");
+        BufferedImage graph = ImageIO.read(new File(".\\Graph.png"));
+        JPanel panel = new JPanel() {
+          protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(graph.getScaledInstance(1000, -1, Image.SCALE_SMOOTH), 0, 0, null);
+          }
+        };
+        JFrame gui = new JFrame();
+        gui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        gui.setSize(1000,1000);
+        gui.setVisible(true);
+        gui.setTitle("Graph");
+        gui.add(panel);
       }
       System.out.println("--------------------------------------------------------------------");
     }

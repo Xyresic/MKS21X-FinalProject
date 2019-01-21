@@ -45,72 +45,77 @@ public class Calculator{
     System.out.println("Welcome to Terminal Instruments model 1.");
     Scanner inputReader = new Scanner(System.in);
     String input;
-    while(!(input = inputReader.nextLine()).equals("exit")){
-      args = input.split("\\s");
-      scanner = new Scanner(new File("data.txt")); //intializes scanner
-      for(int i  = 0; i<28; i++){ //intializes data
-        data[i]=scanner.next()+"\n";
-      }
-      if(args.length>0 && (args[0].equals("radians") || args[0].equals("degrees"))){ //checks for radians/degrees and switches accordingly
-        data[1]=args[0]+"\n";
-        rewrite();
-        String[] temp = new String[args.length-1]; //removes processed values in args
-        for(int i = 1; i<args.length; i++){
-          temp[i-1] = args[i];
+    while(!(input = inputReader.nextLine()).trim().equals("exit")){
+      try{
+        args = input.trim().split("\\s");
+        scanner = new Scanner(new File("data.txt")); //intializes scanner
+        for(int i  = 0; i<28; i++){ //intializes data
+          data[i]=scanner.next()+"\n";
         }
-        args=temp;
-      }
-      if(args.length>2 && args[0].equals("store")){ //checks for use of store
-        if(args[1].length()>1){ //checks for capital letter for the vairable that is storing
-          throw new IllegalArgumentException("Please use a capital letter for the variable");
-        } else if(isNumeric(args[2])){ //checks for correct number format
-          store(args[1].charAt(0),Double.parseDouble(args[2]));
-        } else if(args[2].equals("PREV")){ //checks for storing previous answer
-          store(args[1].charAt(0),Double.parseDouble(data[0]));
-        } else if(args[2].equals("pi")){ //checks for storing constants
-          store(args[1].charAt(0),Math.PI);
-        } else if(args[2].equals("e")){
-          store(args[1].charAt(0),Math.E);
-        } else if(args[2].equals("phi")){
-          store(args[1].charAt(0),phi);
-        } else if(args[2].length()>1){ //checks for use of a capital letter for the reference variable
-          throw new IllegalArgumentException("Please use a capital letter for the reference variable");
-        } else {
-          store(args[1].charAt(0),args[2].charAt(0));
-        }
-        String[] temp = new String[args.length-3]; //removes processed values in args
-        for(int i = 3; i<args.length; i++){
-          temp[i-3] = args[i];
-        }
-        args=temp;
-      }
-      if(args.length == 1 && !args[0].contains("=")){ //checks if user inputted an expression
-        data[0]=Expression.evaluate(args[0])+"\n";
-        rewrite();
-        System.out.println("Ans: "+data[0].substring(0,data[0].length()-1));
-      }
-      if(args.length >= 2 && args[0].equals("graph")){ //checks if user inputted a function
-        ArrayList<String> temporaryArray = new ArrayList<String>();
-        for(int i = 1; i < args.length; i++) {
-          temporaryArray.add(args[i]);
-        }
-        Graph.graph(temporaryArray);
-        System.out.println("Graph.png updated.");
-        BufferedImage graph = ImageIO.read(new File(".\\Graph.png"));
-        JPanel panel = new JPanel() {
-          protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                g.drawImage(graph.getScaledInstance(1000, -1, Image.SCALE_SMOOTH), 0, 0, null);
+        if(args.length>0 && (args[0].equals("radians") || args[0].equals("degrees"))){ //checks for radians/degrees and switches accordingly
+          data[1]=args[0]+"\n";
+          rewrite();
+          String[] temp = new String[args.length-1]; //removes processed values in args
+          for(int i = 1; i<args.length; i++){
+            temp[i-1] = args[i];
           }
-        };
-        JFrame gui = new JFrame();
-        gui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        gui.setSize(1000,1000);
-        gui.setVisible(true);
-        gui.setTitle("Graph");
-        gui.add(panel);
+          args=temp;
+        }
+        if(args.length>2 && args[0].equals("store")){ //checks for use of store
+          if(args[1].length()>1){ //checks for capital letter for the vairable that is storing
+            throw new IllegalArgumentException("Please use a capital letter for the variable");
+          } else if(isNumeric(args[2])){ //checks for correct number format
+            store(args[1].charAt(0),Double.parseDouble(args[2]));
+          } else if(args[2].equals("PREV")){ //checks for storing previous answer
+            store(args[1].charAt(0),Double.parseDouble(data[0]));
+          } else if(args[2].equals("pi")){ //checks for storing constants
+            store(args[1].charAt(0),Math.PI);
+          } else if(args[2].equals("e")){
+            store(args[1].charAt(0),Math.E);
+          } else if(args[2].equals("phi")){
+            store(args[1].charAt(0),phi);
+          } else if(args[2].length()>1){ //checks for use of a capital letter for the reference variable
+            throw new IllegalArgumentException("Please use a capital letter for the reference variable");
+          } else {
+            store(args[1].charAt(0),args[2].charAt(0));
+          }
+          String[] temp = new String[args.length-3]; //removes processed values in args
+          for(int i = 3; i<args.length; i++){
+            temp[i-3] = args[i];
+          }
+          args=temp;
+        }
+        if(args.length == 1 && !args[0].contains("=")){ //checks if user inputted an expression
+          data[0]=Expression.evaluate(args[0])+"\n";
+          rewrite();
+          System.out.println("Ans: "+data[0].substring(0,data[0].length()-1));
+        }
+        if(args.length >= 2 && args[0].equals("graph")){ //checks if user inputted a function
+          ArrayList<String> temporaryArray = new ArrayList<String>();
+          for(int i = 1; i < args.length; i++) {
+            temporaryArray.add(args[i]);
+          }
+          Graph.graph(temporaryArray);
+          System.out.println("Graph.png updated.");
+          BufferedImage graph = ImageIO.read(new File(".\\Graph.png"));
+          JPanel panel = new JPanel() {
+            protected void paintComponent(Graphics g) {
+                  super.paintComponent(g);
+                  g.drawImage(graph.getScaledInstance(1000, -1, Image.SCALE_SMOOTH), 0, 0, null);
+            }
+          };
+          JFrame gui = new JFrame();
+          gui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+          gui.setSize(1000,1000);
+          gui.setVisible(true);
+          gui.setTitle("Graph");
+          gui.add(panel);
+        }
+        System.out.println("--------------------------------------------------------------------");
+      } catch(IllegalArgumentException exception){
+        System.out.println(exception.getMessage());
+        System.out.println("--------------------------------------------------------------------");
       }
-      System.out.println("--------------------------------------------------------------------");
     }
   }
 }

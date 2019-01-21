@@ -173,18 +173,21 @@ public class Graph {
       }
       else{
         int[][] points = new int[2000][2000];
-        ArrayList<ArrayList<Integer>> gaps = new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<Integer>> xgaps = new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<Integer>> ygaps = new ArrayList<ArrayList<Integer>>();
         ArrayList<Integer> start = new ArrayList<Integer>();
         start.add(0);
         start.add(2000);
-        gaps.add(start);
+        xgaps.add(start);
+        ygaps.add(start);
+        boolean fillX = true;
         double cutoff = 0.01;
         ArrayList<String> sortedLeft = Expression.shunt(split.get(0),varList);
         ArrayList<String> sortedRight = Expression.shunt(split.get(1),varList);
-        while(cutoff<0.05){
-          for(int index = 0; index < gaps.size(); index++){
-            for(int xcor = gaps.get(index).get(0); xcor < gaps.get(index).get(1); xcor+=1) {
-              for(int ycor = 0; ycor < height; ycor+=1){
+        while(cutoff<0.15){
+          for(int index = 0; index < (fillX? xgaps.size():ygaps.size()); index++){
+            for(int xcor = xgaps.get(fillX? index:0).get(0); xcor < xgaps.get(fillX? index:0).get(1); xcor+=1) {
+              for(int ycor = ygaps.get(fillX? 0:index).get(0); ycor < ygaps.get(fillX? 0:index).get(1); ycor+=1){
                 tempx = xcor / 100.0 - 10;
                 tempy = 10 - ycor / 100.0;
                 ArrayList<String> copyLeft = new ArrayList<String>(sortedLeft);
@@ -203,34 +206,71 @@ public class Graph {
               }
             }
           }
-          gaps = new ArrayList<ArrayList<Integer>>();
+          if(fillX){
+            xgaps = new ArrayList<ArrayList<Integer>>();
+          } else {
+            ygaps = new ArrayList<ArrayList<Integer>>();
+          }
           boolean inGraph = false;
           ArrayList<Integer> gap = new ArrayList<Integer>();
           ArrayList<Integer> gapStarts = new ArrayList<Integer>();
-          for(int a = 0; a<2000; a++){
-            for(int b = 0; b<2000; b++){
-              if(points[a][b]==1 && !inGraph){
-                inGraph = true;
-                if(!gapStarts.contains(a+1)){
-                  gapStarts.add(a+1);
-                  gap.add(new Integer(a+1));
-                }
-                //System.out.println(gap);
-              }
-              else if(points[a][b]==1 && inGraph){
-                inGraph = false;
-                if(gap.size()>0 && gap.get(0)!=a-1){
-                  gap.add(new Integer(a-1));
-                  if(!gaps.contains(gap)){
-                    gaps.add(gap);
+          if(fillX){
+            for(int a = 0; a<2000; a++){
+              for(int b = 0; b<2000; b++){
+                if(points[a][b]==1 && !inGraph){
+                  inGraph = true;
+                  if(!gapStarts.contains(a+1)){
+                    gapStarts.add(a+1);
+                    gap.add(new Integer(a+1));
                   }
-                  gap = new ArrayList<Integer>();
+                  break;
+                }
+                else if(points[a][b]==1 && inGraph){
+                  inGraph = false;
+                  if(gap.size()>0 && gap.get(0)!=a-1){
+                    gap.add(new Integer(a-1));
+                    if(!xgaps.contains(gap)){
+                      xgaps.add(gap);
+                    }
+                    gap = new ArrayList<Integer>();
+                  }
+                }
+              }
+            }
+          } else {
+            for(int a = 0; a<2000; a++){
+              for(int b = 0; b<2000; b++){
+                if(points[b][a]==1 && !inGraph){
+                  inGraph = true;
+                  if(!gapStarts.contains(a+1)){
+                    gapStarts.add(a+1);
+                    gap.add(new Integer(a+1));
+                  }
+                  break;
+                }
+                else if(points[b][a]==1 && inGraph){
+                  inGraph = false;
+                  if(gap.size()>0 && gap.get(0)!=a-1){
+                    gap.add(new Integer(a-1));
+                    if(!ygaps.contains(gap)){
+                      ygaps.add(gap);
+                    }
+                    gap = new ArrayList<Integer>();
+                  }
                 }
               }
             }
           }
           cutoff+=0.01;
-          System.out.println(cutoff);
+          if((cutoff>0.1 || xgaps.size()==0) && fillX){
+            xgaps = new ArrayList<ArrayList<Integer>>();
+            xgaps.add(start);
+            fillX = false;
+            cutoff = 0.02;
+          }
+          if(ygaps.size()==0){
+            break;
+          }
         }
       }
       equationCount++;

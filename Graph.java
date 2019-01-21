@@ -26,25 +26,22 @@ public class Graph {
     return solve(sorted,substitutes);
   }
   public static int colorwheel(int x) {
-    if (x % 7 ==0) { //red
+    if (x % 6 ==0) { //red
       return  (10<<24) | (255<<16) | (0<<8) | 0;
     }
-    if (x % 7 ==1) { //orange
+    if (x % 6 ==1) { //orange
       return  (10<<24) | (255<<16) | (99<<8) | 0;
     }
-    if (x % 7 ==2) { //yellow
+    if (x % 6 ==2) { //yellow
       return  (18<<24) | (255<<16) | (215<<8) | 20;
     }
-    if (x % 7 ==3) {
+    if (x % 6 ==3) {
       return  (10<<24) | (0<<16) | (255<<8) | 0;
     }
-    if (x % 7 ==4) {
+    if (x % 6 ==4) {
       return  (10<<24) | (0<<16) | (0<<8) | 255;
     }
-    if (x % 7 ==5) {
-      return  (10<<24) | (153<<16) | (153<<8) | 255;
-    }
-      return  (10<<24) | (153<<16) | (0<<8) | 153;
+    return  (10<<24) | (153<<16) | (0<<8) | 153;
   }
   public static void graph(ArrayList<String> equations) throws FileNotFoundException {
     double x = 0; // x pixel value
@@ -117,7 +114,6 @@ public class Graph {
       for(String half : converted.split("=")){
         split.add(half);
       }
-      double only = 0;
       double tempx = 0; // Saves a temporary x value to be used for math purposes
       double tempy = 0; // Saves a temporary x value to be used for math purposes
       ArrayList<String> copy; // makes a copy because our current code deletes the values in the ArrayList. This is because the x value keeps on getting replaced
@@ -157,11 +153,6 @@ public class Graph {
                 }
               }
             }
-            if (y == 1000 && only <= 0) {
-              System.out.println("The root is " + tempx);
-              only = 1;
-            }
-            only -= .01;
           }
           if(Double.isNaN(y)){
             copy = Expression.shunt(converted.replaceAll("y=","").replaceAll("=y",""),varList);
@@ -170,8 +161,7 @@ public class Graph {
             oldvalue = (int)y;
           }
         }
-      }
-      else{
+      } else {
         int[][] points = new int[2000][2000];
         ArrayList<ArrayList<Integer>> xgaps = new ArrayList<ArrayList<Integer>>();
         ArrayList<ArrayList<Integer>> ygaps = new ArrayList<ArrayList<Integer>>();

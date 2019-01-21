@@ -184,7 +184,7 @@ public class Graph {
         double cutoff = 0.01;
         ArrayList<String> sortedLeft = Expression.shunt(split.get(0),varList);
         ArrayList<String> sortedRight = Expression.shunt(split.get(1),varList);
-        while(cutoff<0.15){
+        while(cutoff<0.1495){
           for(int index = 0; index < (fillX? xgaps.size():ygaps.size()); index++){
             for(int xcor = xgaps.get(fillX? index:0).get(0); xcor < xgaps.get(fillX? index:0).get(1); xcor+=1) {
               for(int ycor = ygaps.get(fillX? 0:index).get(0); ycor < ygaps.get(fillX? 0:index).get(1); ycor+=1){
@@ -261,7 +261,7 @@ public class Graph {
               }
             }
           }
-          cutoff+=0.01;
+          cutoff+=0.015;
           if((cutoff>0.1 || xgaps.size()==0) && fillX){
             xgaps = new ArrayList<ArrayList<Integer>>();
             xgaps.add(start);

@@ -44,13 +44,13 @@ public class Expression{
         stack.add(0,temp); //add the token to the stack
         i++;
       } else if (Character.isLetter(input.charAt(i))) { //if the current char is a letter...
-        if(i>0 && Character.isDigit(input.charAt(i-1))){
+        if(i>0 && (Character.isDigit(input.charAt(i-1)) || variables.contains(input.charAt(i-1)+""))){
           stack.add(0,new Token("*"));
         }
-        while(i<input.length() && Character.isLetter(input.charAt(i))){ //...add subsequent letters to a temporary holder
+        do { //...add subsequent letters to a temporary holder
           holder+=input.charAt(i);
           i++;
-        }
+        } while(i<input.length() && Character.isLetter(input.charAt(i)) && !variables.contains(holder));
         if(holder.equals("PREV")){ //previous answer
           Scanner scanner = new Scanner(new File("data.txt"));
           queue.add(scanner.next());

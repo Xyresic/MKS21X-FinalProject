@@ -40,13 +40,13 @@ public class Token{
     add(new Token("cosh",5,0,1));
     add(new Token("tanh",5,0,1));
   }};
-  public Token(String name, int precedence, int associativity, int arguments){ // Constuctor for all Tokens. Currently parameter is a ongoign process, many values might get chagned. Others are stable.
+  public Token(String name, int precedence, int associativity, int arguments){ //initial constructor with defined parameters
     value = name;
     priority = precedence;
     direction = associativity;
     parameters = arguments;
   }
-  public Token(String name){ // Another contrustor that converts a given string to a contructor from the list above.
+  public Token(String name){ //constructor that finds predefined token, used for convenience
     value = name;
     for(Token reference:tokens){
       if(reference.value.equals(name)){
@@ -56,54 +56,56 @@ public class Token{
       }
     }
   }
-  public int getArgs(){
+  public int getArgs(){ //returns number of arguments
     return parameters;
   }
-  public int getDirection(){
+  public int getDirection(){ //returns direction of token
     return direction;
   }
   public boolean equals(Object input){ //checks for equality
-    if(input==this){
+    if(input==this){ //a token is equal to itself
       return true;
     }
-    if(input instanceof Token){
+    if(input instanceof Token){ //token equality is determined by name
       return value.equals(((Token)input).value);
     }
-    if(input instanceof String){
+    if(input instanceof String){ //token equality but given name
       return (value.equals(input));
     }
-    else{
+    else{ //otherwise, they're not equal
       return false;
     }
   }
-  public boolean equals(char input){
+  public boolean equals(char input){ //equality check but for characters
     return (value.equals(input + ""));
   }
   public boolean isSlower(Token input) { //checks if this token is slower or of the same precedence and left associaitve
-    if (this.priority < input.priority) {
+    if (this.priority < input.priority) { //if this token has lower precedence, it's considered slower
       return true;
     }
-    if (this.priority == input.priority && input.direction == -1) {
+    if (this.priority == input.priority && input.direction == -1) { //if the two tokens have the same precedence, this token is considered slower if it's left associative
       return true;
     }
-    return false;
+    return false; //otherwise, it's faster
   }
-  public String toString() {
+  public String toString() { //returns the name of the token
     return value;
   }
-  public static boolean isOperator(Token check){
+  public static boolean isOperator(Token check){ //checks if the token is an operator as opposed to a function
     return check.value.length()==1;
   }
-  public static double gcf(double a, double b) {// Finds gcd of 2 numbers using a simple recusive loop
-    if(a % 1 != 0.0 || b % 1 != 0) { // Checks if they are "intergers", It works weridly with negative numbers
+  public static double gcf(double a, double b) {// finds gcd of 2 numbers using a simple recusive loop
+    if(a % 1 != 0.0 || b % 1 != 0) { //checks if they are integers
       throw new IllegalArgumentException("Please use integers for gcf");
     }
+    a=Math.abs(a); //take the absolute value in case they're negative
+    b=Math.abs(b);
     if (a % b == 0) {
       return b;
     }
     return gcf(b % a, a);
   }
-  public static double factorial(double a){ // Uses a Recusive Loop to multiply factorial. Honestly, a normal loop would work just as well.
+  public static double factorial(double a){ //calculates factorials recursively
     if(a % 1 != 0.0 || a<0) {
       throw new IllegalArgumentException("Please use positive integers for factorial");
     }
@@ -112,22 +114,22 @@ public class Token{
     }
     return a*factorial(a-1);
   }
-  public static double choose(double a, double b){
-    if(a % 1 != 0.0 || b % 1 != 0 || a<0 || b<0) {
+  public static double choose(double a, double b){ //combinations
+    if(a % 1 != 0.0 || b % 1 != 0 || a<0 || b<0) { //throw error if positive integers aren't used
       throw new IllegalArgumentException("Please use positive integers for choose");
     }
-    if(b>a){
+    if(b>a){ //throw error if second number is greater than the first
       throw new IllegalArgumentException("Second parameter for choose has to be less than or equal to the first");
     }
-    return factorial(a)/(factorial(b)*(factorial(a-b)));
+    return factorial(a)/(factorial(b)*(factorial(a-b))); //calculator combination
   }
-  public static double permute(double a, double b){
-    if(a % 1 != 0.0 || b % 1 != 0 || a<0 || b<0) {
+  public static double permute(double a, double b){ //permutations
+    if(a % 1 != 0.0 || b % 1 != 0 || a<0 || b<0) { //same errors as combinations
       throw new IllegalArgumentException("Please use positive integers for permute");
     }
     if(b>a){
       throw new IllegalArgumentException("Second parameter for permute has to be less than or equal to the first");
     }
-    return factorial(a)/factorial(a-b);
+    return factorial(a)/factorial(a-b); //calculate permutation
   }
 }

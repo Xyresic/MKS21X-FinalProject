@@ -133,11 +133,16 @@ public class Graph {
       ArrayList<String> copy; // makes a copy because our current code deletes the values in the ArrayList. This is because the x value keeps on getting replaced
       int oldvalue = 0;
       int dif = 0;
-      if(variables.size()==1 && !expression.contains("=") || split.contains("y")){
+      if(variables.size()==1 && !expression.contains("=") || split.contains("y") || split.contains("x")){
         boolean asymptote = false;
         for(x = 0; x < width;x += 1) {
           dif = 0;
-          copy = Expression.shunt(converted.replaceAll("y=","").replaceAll("=y",""),varList); // every time it needs to reset the value
+          if(split.contains("y")){
+            copy = Expression.shunt(converted.replaceAll("y=","").replaceAll("=y",""),varList); // every time it needs to reset the value
+          }
+          else{
+            copy = Expression.shunt(converted.replaceAll("x=","").replaceAll("=x","").replaceAll("y","x"),varList);
+          }
           tempx = x/100-10; // convert standard double x to pixel value
           DecimalFormat rounder = new DecimalFormat("#.##");
           tempx = Double.parseDouble(rounder.format(tempx));
@@ -155,7 +160,12 @@ public class Graph {
           }
           if (asymptote || y < 2000 && y > 0) { // if the y is within the range of the graph
             if(y < 2000 && y > 0){
-              img.setRGB((int)x, (int)y, color);
+              if(split.contains("x")){
+                img.setRGB((int)y, (int)x, color);
+              }
+              else{
+                img.setRGB((int)x, (int)y, color);
+              }
             }
             if(!expression.contains("floor") && !expression.contains("ceil")){
               y = (double)(int)y;
@@ -163,7 +173,12 @@ public class Graph {
                 if (y > oldvalue) {dif += 1;}
                 else {dif -= 1;}
                 if (y - dif < 2000 && y - dif > 0) {
-                  img.setRGB((int)x, (int)y - dif, color); // sets the value to color red
+                  if(split.contains("x")){
+                    img.setRGB((int)y - dif, (int)x, color);
+                  }
+                  else{
+                    img.setRGB((int)x, (int)y - dif, color); // sets the value to color red
+                  }
                 }
               }
             }
@@ -276,6 +291,7 @@ public class Graph {
             break;
           }
         }
+        System.out.println(Arrays.toString(points));
       }
       equationCount++;
     }

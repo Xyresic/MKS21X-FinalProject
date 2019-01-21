@@ -99,3 +99,12 @@ Development Log:
   - Implemented graphing relations
   - Improved trigonometric functions
   - Fixed graphs with discontinuities
+
+  1/20/19
+  - Asymptotes now connect properly
+  - Floor and Ceil functions now connect properly
+  - Made graphs look smoother
+  - Implemented connecting points for relations, kind of
+  - Implemented windowed graph display
+  - Implemented error handling
+  - Unable to fully connect relations, possibly impossible without solving for x due to floating point arithmetic errors

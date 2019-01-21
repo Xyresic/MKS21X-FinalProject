@@ -5,12 +5,12 @@ APCS Project <(￣︶￣)↗[GO!] : Terminal Instruments TI-01
 By: Eric Lam and Kevin Chen
 
 Instructions: This calculator is entirely terminal based. Compile Calculator.java and run it.
- - For evaluating expressions: [radians/degrees] [store "capital_letter" "value/variable/constant"] "expression"
- - For graphing: graph "function(x)"
+
+Commands take the form of:  [radians/degrees] [store "capital_letter" "value/variable/constant"] ["expression"] [graph "function(x)"]
+
+Parts in brackets are optional. Each part may be excluded; however, they must remain in the given order. Parts in quotes are placeholders; replace them with what they describe. Parts not in quotes must be typed exactly. Parts with slashes require you to choose one of the components.
 
  To exit, type exit.
-
- Graphing currently creates an .png file named Graph.png.
 
  Use PREV as the previous answer variable.
 
@@ -29,7 +29,8 @@ Instructions: This calculator is entirely terminal based. Compile Calculator.jav
  - asin(value), acos(value), atan(value)
  - sinh(value), cosh(value), tanh(value)
 
-Warning: Expressions using radicals, logarithms, divison, and trigonometric functions may return values that are slightly off.
+Warning: Values may be slightly off due to floating point arithmetic rounding errors.
+Warning: We sacrificed speed for more accurate graphs when graphing relations (graphs where y is manipulated and not just x). Each relations can take up to a minute to graph. Graphing relations is very buggy and will come out jagged and sometimes not continuous.
 
 Development Log:
 

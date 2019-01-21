@@ -97,17 +97,19 @@ public class Expression{
         stack.add(0,new Token("("));
         i++;
       } else if(input.charAt(i)==')'){ //if close parenthesis, pop tokens until open parenthesis is found
-        if(curFunction.toString().length()>0 && commaCount!=curFunction.getArgs()-1){ //if there is an incorrect number of commas, throw an error
-          throw new IllegalArgumentException("Missing or extraneous commas");
-        }
-        curFunction = new Token(""); //reset the current function and comma count
-        commaCount = 0;
-        if(!stack.contains(new Token("("))){ //if there is no open parenthesis, throw an error
-          throw new IllegalArgumentException("There are one or more unmatched parentheses");
-        }
         if(stack.size()>1 && stack.get(0).equals(new Token("-")) && stack.get(1).equals(new Token("("))){ //if there is a negative number, add it to the queue
           queue.set(queue.size()-1,"-"+queue.get(queue.size()-1));
           stack.remove(0); //remove negative sign
+        }
+        else {
+          if(curFunction.toString().length()>0 && commaCount!=curFunction.getArgs()-1){ //if there is an incorrect number of commas, throw an error
+            throw new IllegalArgumentException("Missing or extraneous commas");
+          }
+          curFunction = new Token(""); //reset the current function and comma count
+          commaCount = 0;
+        }
+        if(!stack.contains(new Token("("))){ //if there is no open parenthesis, throw an error
+          throw new IllegalArgumentException("There are one or more unmatched parentheses");
         }
         while(stack.size()>0 && !stack.get(0).equals(new Token("("))){
           queue.add("" + stack.remove(0));

@@ -99,16 +99,29 @@ public class Graph {
       }
       String converted = "";
       for(i = 0; i<expression.length(); i++){
-        if(expression.charAt(i)==variables.get(0).charAt(0)){
-          converted+='x';
-        }
-        else if(variables.size()>1 && expression.charAt(i)==variables.get(1).charAt(0)){
-          converted+='y';
+        if(expression.charAt(i)>='a' && expression.charAt(i)<='z'){
+          String holder = "";
+          while(i<expression.length() && expression.charAt(i)>='a' && expression.charAt(i)<='z'){
+            holder+=expression.charAt(i);
+            i++;
+          }
+          System.out.print(holder+"\n");
+          if(holder.length()==1 && holder.charAt(0)==variables.get(0).charAt(0)){
+            converted+='x';
+          }
+          else if(variables.size()>1 && holder.length()==1 && holder.charAt(0)==variables.get(1).charAt(0)){
+            converted+='y';
+          }
+          else{
+            converted+=holder;
+          }
+          i--;
         }
         else{
           converted+=expression.charAt(i);
         }
       }
+      System.out.println(converted);
       converted = converted.trim().replaceAll("\\s","");
       ArrayList<String> split = new ArrayList<String>();
       for(String half : converted.split("=")){

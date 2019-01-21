@@ -108,7 +108,7 @@ public class Calculator{
           gui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
           gui.setSize(1000,1000);
           gui.setVisible(true);
-          gui.setTitle("Graph");
+          gui.setTitle(temporaryArray.toString().substring(1,temporaryArray.toString().length()-1));
           gui.add(panel);
         }
         System.out.println("--------------------------------------------------------------------");

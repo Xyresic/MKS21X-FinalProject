@@ -105,8 +105,10 @@ public class Graph {
             holder+=expression.charAt(i);
             i++;
           }
-          System.out.print(holder+"\n");
-          if(holder.length()==1 && holder.charAt(0)==variables.get(0).charAt(0)){
+          if(holder.equals("y") && variables.size()==1){
+            converted+='y';
+          }
+          else if(holder.length()==1 && holder.charAt(0)==variables.get(0).charAt(0)){
             converted+='x';
           }
           else if(variables.size()>1 && holder.length()==1 && holder.charAt(0)==variables.get(1).charAt(0)){
@@ -121,7 +123,6 @@ public class Graph {
           converted+=expression.charAt(i);
         }
       }
-      System.out.println(converted);
       converted = converted.trim().replaceAll("\\s","");
       ArrayList<String> split = new ArrayList<String>();
       for(String half : converted.split("=")){
@@ -132,7 +133,7 @@ public class Graph {
       ArrayList<String> copy; // makes a copy because our current code deletes the values in the ArrayList. This is because the x value keeps on getting replaced
       int oldvalue = 0;
       int dif = 0;
-      if(variables.size()==1 || split.contains("y")){
+      if(variables.size()==1 && !expression.contains("=") || split.contains("y")){
         boolean asymptote = false;
         for(x = 0; x < width;x += 1) {
           dif = 0;
@@ -187,7 +188,7 @@ public class Graph {
         double cutoff = 0.01;
         ArrayList<String> sortedLeft = Expression.shunt(split.get(0),varList);
         ArrayList<String> sortedRight = Expression.shunt(split.get(1),varList);
-        while(cutoff<0.1495){
+        while(cutoff<0.1){
           for(int index = 0; index < (fillX? xgaps.size():ygaps.size()); index++){
             for(int xcor = xgaps.get(fillX? index:0).get(0); xcor < xgaps.get(fillX? index:0).get(1); xcor+=1) {
               for(int ycor = ygaps.get(fillX? 0:index).get(0); ycor < ygaps.get(fillX? 0:index).get(1); ycor+=1){
@@ -264,7 +265,7 @@ public class Graph {
               }
             }
           }
-          cutoff+=0.015;
+          cutoff+=0.01;
           if((cutoff>0.1 || xgaps.size()==0) && fillX){
             xgaps = new ArrayList<ArrayList<Integer>>();
             xgaps.add(start);

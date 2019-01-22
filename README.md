@@ -6,9 +6,9 @@ By: Eric Lam and Kevin Chen
 
 Instructions: This calculator is entirely terminal based. Compile Calculator.java and run it.
 
-Commands take the form of:  [radians/degrees] [store "capital_letter" "value/variable/constant"] ["expression"] [graph "function(x)"]
+Commands take the form of: [help] [radians/degrees] [store "capital_letter" "value/variable/constant"] ["expression"] [graph "function(x)"]
 
-Parts in brackets are optional. Each part may be excluded; however, they must remain in the given order. Parts in quotes are placeholders; replace them with what they describe. Parts not in quotes must be typed exactly. Parts with slashes require you to choose one of the components. Multifunctions work!
+Parts in brackets are optional. Each part may be excluded; however, they must remain in the given order. Parts in quotes are placeholders; replace them with what they describe. Parts not in quotes must be typed exactly. Parts with slashes require you to choose one of the components.
 
  To exit, type exit.
 
@@ -33,7 +33,8 @@ Warning: Values may be slightly off due to floating point arithmetic rounding er
 
 Warning: We sacrificed speed for more accurate graphs when graphing relations (graphs where y is manipulated and not just x). Each relation can take up to a minute to graph. Graphing relations is very buggy and will come out jagged and sometimes not continuous.
 
-Warning: Graph has a range from -10 to positive 10 for both x and y values. If there is no values in that range, nothing will be graphed.
+Warning: Graph has a range from -10 to +10 for both x and y values. If there are no values in that range, nothing will be graphed.
+
 Development Log:
 
  1/4/2019
@@ -111,10 +112,9 @@ Development Log:
   - Implemented windowed graph display
   - Implemented error handling
   - Unable to fully connect relations, possibly impossible without solving for x due to floating point arithmetic errors
-  
+
   1/21/19
   - Fixed bugs with vertical and horizontal lines
   - Fixed multivariable bugs
   - Fixed bugs with negative numbers and bugs
   - Added comments
-  

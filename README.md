@@ -110,3 +110,10 @@ Development Log:
   - Implemented windowed graph display
   - Implemented error handling
   - Unable to fully connect relations, possibly impossible without solving for x due to floating point arithmetic errors
+  
+  1/21/19
+  - Fixed bugs with vertical and horizontal lines
+  - Fixed multivariable bugs
+  - Fixed bugs with negative numbers and bugs
+  - Added comments
+  

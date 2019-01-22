@@ -29,6 +29,8 @@ Parts in brackets are optional. Each part may be excluded; however, they must re
  - asin(value), acos(value), atan(value)
  - sinh(value), cosh(value), tanh(value)
 
+There is an ExtensiveHelp.pdf file. It List all the supported feautres in detail, and an example of how they work. Everything in there is tested.
+
 Warning: Values may be slightly off due to floating point arithmetic rounding errors.
 
 Warning: We sacrificed speed for more accurate graphs when graphing relations (graphs where y is manipulated and not just x). Each relation can take up to a minute to graph. Graphing relations is very buggy and will come out jagged and sometimes not continuous.

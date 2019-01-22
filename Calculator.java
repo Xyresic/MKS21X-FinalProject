@@ -64,7 +64,7 @@ public class Calculator{
         }
           if(args.length>0 && (args[0].equals("help"))) {
             String[] temp = new String[args.length-1]; //removes processed command in args
-            File help = new File("help.txt");
+            File help = new File("help.txt"); // read file block
             Scanner scnr = new Scanner(help);
             int lineNumber = 1;
             while(scnr.hasNextLine()){

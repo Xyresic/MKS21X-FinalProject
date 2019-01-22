@@ -43,6 +43,7 @@ public class Calculator{
   }
   public static void main(String[] args) throws FileNotFoundException, IOException{ //where the user interface happens
     System.out.println("Welcome to Terminal Instruments model 1."); //welcome message
+    System.out.println("If you need help please type in help"); //help message
     Scanner inputReader = new Scanner(System.in); //scanner to read continuous user input
     String input; //string to store the input
     while(!(input = inputReader.nextLine()).trim().equals("exit")){ //if the user types exit, stop the program
@@ -61,6 +62,18 @@ public class Calculator{
           }
           args=temp;
         }
+          if(args.length>0 && (args[0].equals("help"))) {
+            String[] temp = new String[args.length-1]; //removes processed command in args
+            File help = new File("help.txt");
+            Scanner scnr = new Scanner(help);
+            int lineNumber = 1;
+            while(scnr.hasNextLine()){
+           String line = scnr.nextLine();
+           System.out.println(line);
+           lineNumber++;
+           args = temp;
+       }
+          }
         if(args.length>2 && args[0].equals("store")){ //checks for use of store
           if(args[1].length()>1){ //checks for capital letter for the vairable that is storing
             throw new IllegalArgumentException("Please use a capital letter for the variable");

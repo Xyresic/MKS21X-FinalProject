@@ -110,7 +110,7 @@ public class Calculator{
           }
           Graph.graph(temporaryArray); //graph the functions
           System.out.println("Graph.png updated."); //print success message
-          BufferedImage graph = ImageIO.read(new File(".\\Graph.png")); //store the image as a bufferedimage
+          BufferedImage graph = ImageIO.read(new File("Graph.png")); //store the image as a bufferedimage
           JPanel panel = new JPanel() { //create a panel to hold the image
             protected void paintComponent(Graphics g) { //override the method to draw an image
                   super.paintComponent(g);

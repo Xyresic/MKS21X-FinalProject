@@ -240,14 +240,14 @@ public class Graph {
                   inGraph = true; //we are now in the graph
                   if(!gapStarts.contains(a+1)){ //if the gap start point has not been accounted for
                     gapStarts.add(a+1); //add it to the list
-                    gap.add(new Integer(a+1)); //add the start point to gap
+                    gap.add(a+1); //add the start point to gap
                   }
                   break; //move on to next x-value
                 }
                 else if(points[a][b]==1 && inGraph){ //if a point is found and we're in the graph
                   inGraph = false; //we are now out of the graph
                   if(gap.size()>0 && gap.get(0)!=a-1){ //if the two points are not next to each other
-                    gap.add(new Integer(a-1)); //add the endpoint to gap
+                    gap.add(a-1); //add the endpoint to gap
                     if(!xgaps.contains(gap)){ //if this is a new gap
                       xgaps.add(gap); //add it to the list of gaps
                     }
@@ -263,14 +263,14 @@ public class Graph {
                   inGraph = true;
                   if(!gapStarts.contains(a+1)){
                     gapStarts.add(a+1);
-                    gap.add(new Integer(a+1));
+                    gap.add(a+1);
                   }
                   //break;
                 }
                 else if(points[b][a]==1 && inGraph){
                   inGraph = false;
                   if(gap.size()>0 && gap.get(0)!=a-1){
-                    gap.add(new Integer(a-1));
+                    gap.add(a-1);
                     if(!ygaps.contains(gap)){
                       ygaps.add(gap);
                     }

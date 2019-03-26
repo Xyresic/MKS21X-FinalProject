@@ -1,4 +1,5 @@
 import java.util.*;
+@SuppressWarnings("overrides")
 public class Token{
   private String value; //String version of operator/function
   private int priority; //priority of token when calculating
